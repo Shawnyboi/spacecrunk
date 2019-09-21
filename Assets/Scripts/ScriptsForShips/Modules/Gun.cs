@@ -27,6 +27,12 @@ public class Gun : Module
         }
     }
 
+    public override void Turn(bool clockwise)
+    {
+        DefaultTurn(clockwise);
+    }
+
+    /* uncomment for testing*/
     private void Start()
     {
         m_TestFire();
@@ -35,4 +41,17 @@ public class Gun : Module
     {
         m_Charge = m_MaxCharge;
     }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            Turn(false);
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            Turn(true);
+        }
+    }
+
 }

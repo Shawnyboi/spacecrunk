@@ -9,4 +9,10 @@ public class LifeSupport : Module
         //Fill up the oxygen in the ship or on the players or however
         
     }
+
+    public override void Turn(bool clockwise)
+    {
+        // do nothing
+    }
+
 }

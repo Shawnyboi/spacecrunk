@@ -19,6 +19,6 @@ public class Projectile : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<SphereCollider>();
         m_Rigidbody.velocity = this.transform.forward * m_Speed;
-        Destroy(this, m_Lifetime);
+        Destroy(this.gameObject, m_Lifetime);
     }
 }

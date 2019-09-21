@@ -21,6 +21,8 @@ public class CrunkMover : MonoBehaviour
 
 	bool grounded = true;
 
+    public void setGrounded(bool b) => grounded = b;
+
 	Vector3 externalForce = Vector3.zero ;
 
 	private void Start()

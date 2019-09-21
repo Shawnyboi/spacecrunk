@@ -11,4 +11,9 @@ public class Engines : Module
         
     }
 
+    public override void Turn(bool clockwise)
+    {
+        DefaultTurn(clockwise);
+    }
+
 }

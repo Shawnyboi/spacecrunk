@@ -8,4 +8,9 @@ public class TractorBeam : Module
     {
         //turn on  the tractor beam and allow for it to be aimed
     }
+
+    public override void Turn(bool clockwise)
+    {
+        DefaultTurn(clockwise);
+    }
 }

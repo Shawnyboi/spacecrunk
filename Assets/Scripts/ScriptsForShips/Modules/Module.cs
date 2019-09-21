@@ -10,6 +10,10 @@ abstract public class Module : MonoBehaviour
     protected float m_Charge;
     protected const float m_MaxCharge = 1;
     [SerializeField]
+    protected float m_TurnSpeed;
+    [SerializeField]
+    protected float m_MaxArc;
+    [SerializeField]
     protected float m_ChargeTime;
     [SerializeField]
     protected float m_ChargeDownTime;
@@ -88,4 +92,29 @@ abstract public class Module : MonoBehaviour
     }
 
     abstract protected void Fire();
+    abstract public void Turn(bool clockwise);
+
+    protected void DefaultTurn(bool clockwise)
+    {
+
+        float angle = transform.localRotation.eulerAngles.y;
+        if(angle > 180)
+        {
+            angle = angle - 360;
+        }
+
+        if (clockwise) {
+            if (angle < m_MaxArc)
+            {
+                transform.Rotate(transform.up, m_TurnSpeed * Time.fixedDeltaTime);
+            }
+        }
+        else
+        {
+            if (angle > -m_MaxArc)
+            {
+                transform.Rotate(transform.up, -m_TurnSpeed * Time.fixedDeltaTime);
+            }
+        }
+    }
 }
