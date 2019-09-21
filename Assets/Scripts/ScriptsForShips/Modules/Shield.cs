@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : MonoBehaviour
+public class Shield : Module
 {
-    // Start is called before the first frame update
-    void Start()
+    override protected IEnumerator Fire()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        //Make a shield around the shit
+        yield return null;
+    }    
 }

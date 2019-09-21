@@ -41,7 +41,7 @@ public class Ship : MonoBehaviour
         }
     }    
 
-    public Module RemoveModuleAtCollider(Collider c)
+    public Module RemoveModuleAtCollider(Collider c)      
     {
         ModuleSlot moduleToRemove = m_ColliderToModuleDictionary[c];
         m_ColliderToModuleDictionary[c] = null;
@@ -75,4 +75,8 @@ public class ModuleSlot
         return m_Module != null;
     }
 
+    public Quaternion GetDirection()
+    {
+        return m_Transform.rotation;
+    }
 }
