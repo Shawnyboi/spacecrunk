@@ -14,8 +14,14 @@ public class CrunkMover : MonoBehaviour
 	float maxSpeed = 10;
 	[SerializeField]
 	float acceleration = 10;
+	[SerializeField]
+	float groundedDragFactor = 0.6f;
+	[SerializeField]
+	float floatingDragFactor = 0.8f;
 
 	bool grounded = true;
+
+	Vector3 externalForce = Vector3.zero ;
 
 	private void Start()
 	{
@@ -27,13 +33,26 @@ public class CrunkMover : MonoBehaviour
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
-		var force = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
+		body.AddForce(externalForce);
 
-		body.AddForce(force);
+		var internalForce = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
 
-		if (body.velocity.sqrMagnitude > (maxSpeed * maxSpeed))
+		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed))
 		{
-			body.velocity = body.velocity.normalized * maxSpeed;
+			body.AddForce(internalForce);
 		}
+
+		if ((internalForce.sqrMagnitude + externalForce.sqrMagnitude) < Helper.Epsilon)
+		{
+
+			body.velocity *= grounded ? groundedDragFactor : floatingDragFactor;
+		}
+
+		externalForce = Vector3.zero;
+	}
+
+	public void ApplyExternalForce(Vector3 force)
+	{
+		externalForce += force;
 	}
 }

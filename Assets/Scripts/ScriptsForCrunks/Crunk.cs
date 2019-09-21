@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Crunk : MonoBehaviour
 {
-	public Ship allyShip = null;//todo this should be private
-	public Ship enemeyShip = null;//todo this should be private
-	public Ship parentShip = null;//todo this should be private
-	private ModuleSlot nearbySlot;
-	private Module nearbyModule;
-	private Module heldModule;
+	//todo this should be private
+	public Ship allyShip = null;
+	public Ship enemyShip = null;
+	public Ship parentShip = null;
+	public ModuleSlot nearbySlot;
+	public Module nearbyModule;
+	public Module heldModule;
 
-	public Module GetModule()
+	/*public Module GetModule()
 	{
 		if (heldModule != null)
 		{
@@ -27,7 +28,7 @@ public class Crunk : MonoBehaviour
 		}
 
 		return null;
-	}
+	}*/
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -52,7 +53,7 @@ public class Crunk : MonoBehaviour
 		var slot = allyShip.GetModuleSlotAtCollider(other);
 		if (slot == null)
 		{
-			slot = enemeyShip.GetModuleSlotAtCollider(other);
+			slot = enemyShip.GetModuleSlotAtCollider(other);
 		}
 
 		return slot;

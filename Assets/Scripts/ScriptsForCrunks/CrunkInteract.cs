@@ -28,8 +28,8 @@ public class CrunkInteract : MonoBehaviour
 		{
 			if (interacting)
 			{
-				var module = crunk.GetModule();
-				if (module != null)
+				//var module = crunk.GetModule();
+				//if (module != null)
 				{
 
 				}
@@ -48,6 +48,12 @@ public class CrunkInteract : MonoBehaviour
 			}
 
 			interactTime += Time.deltaTime;
+		}
+
+
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			GetComponent<CrunkMover>().ApplyExternalForce(new Vector3(1000, 0, 0));
 		}
 	}
 }
