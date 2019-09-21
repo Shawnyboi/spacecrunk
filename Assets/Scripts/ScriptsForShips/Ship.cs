@@ -21,7 +21,11 @@ public class Ship : MonoBehaviour
 
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
     {
-        return m_ColliderToModuleDictionary[c];
+		if (m_ColliderToModuleDictionary.ContainsKey(c))
+		{
+			return m_ColliderToModuleDictionary[c];
+		}
+		return null;
     }
 
     public bool AddModule(Collider c, Module m)
@@ -49,8 +53,13 @@ public class Ship : MonoBehaviour
 
 public class ModuleSlot
 {
-    private Transform m_Transform;
+
     private Module m_Module = null;
+    [SerializeField]
+    private Transform m_Transform;
+
+	//TODO Better way?
+	public Module Module => m_Module;
     
     public void AddModule(Module m)
     {
@@ -73,4 +82,5 @@ public class ModuleSlot
     {
         return m_Transform.rotation;
     }
+
 }
