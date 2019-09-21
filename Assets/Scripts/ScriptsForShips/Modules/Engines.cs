@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engines : MonoBehaviour
+public class Engines : Module
 {
-    // Start is called before the first frame update
-    void Start()
+
+    override protected IEnumerator Fire()
     {
-        
+        //Allow for ship movement for a time
+        yield return null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

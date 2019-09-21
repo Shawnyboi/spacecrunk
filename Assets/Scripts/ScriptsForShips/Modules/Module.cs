@@ -13,14 +13,17 @@ abstract public class Module : MonoBehaviour
     protected float m_ChargeDownTime;
     protected Rigidbody m_ModuleRB;
     protected Collider m_ModuleCollider;
+    protected Crunk m_CurrentCrunk = null;
 
-    public void LockIn()
+    public void LockIn(Crunk c)
     {
+        m_CurrentCrunk = c;
         m_LockedIn = true;
     }
 
     public void LockOut()
     {
+        m_CurrentCrunk = null;
         m_LockedIn = false;
     }
 

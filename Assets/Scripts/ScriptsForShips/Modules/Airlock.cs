@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Airlock : MonoBehaviour
+public class Airlock : Module
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override IEnumerator Fire()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Take crunk and move him outside of ship
+        yield return null;
     }
 }

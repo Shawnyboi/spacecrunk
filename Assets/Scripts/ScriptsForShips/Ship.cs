@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class Ship
 {
     private List<ModuleSlot> m_Slots = new List<ModuleSlot>(4);
     private Dictionary<Collider, ModuleSlot> m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
@@ -58,7 +58,7 @@ public class ModuleSlot
     [SerializeField]
     private Transform m_Transform;
 
-	//TODO Better way?
+    //might be null
 	public Module Module => m_Module;
     
     public void AddModule(Module m)
