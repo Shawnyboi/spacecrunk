@@ -21,7 +21,11 @@ public class Ship : MonoBehaviour
 
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
     {
-        return m_ColliderToModuleDictionary[c];
+		if (m_ColliderToModuleDictionary.ContainsKey(c))
+		{
+			return m_ColliderToModuleDictionary[c];
+		}
+		return null;
     }
 
     public bool AddModule(Collider c, Module m)
@@ -50,6 +54,9 @@ public class Ship : MonoBehaviour
 public class ModuleSlot
 {
     private Module m_Module = null;
+
+	//TODO Better way?
+	public Module Module => m_Module;
     
     public void AddModule(Module m)
     {
