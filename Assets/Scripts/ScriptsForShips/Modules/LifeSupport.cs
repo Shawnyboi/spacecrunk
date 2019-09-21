@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeSupport : MonoBehaviour
+public class LifeSupport : Module
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Fire()
     {
+        //Fill up the oxygen in the ship or on the players or however
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Turn(bool clockwise)
     {
-        
+        // do nothing
     }
+
 }

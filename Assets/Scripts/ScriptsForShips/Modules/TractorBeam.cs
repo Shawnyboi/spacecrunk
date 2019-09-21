@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TractorBeam : MonoBehaviour
+public class TractorBeam : Module
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Fire()
     {
-        
+        //turn on  the tractor beam and allow for it to be aimed
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Turn(bool clockwise)
     {
-        
+        DefaultTurn(clockwise);
     }
 }
