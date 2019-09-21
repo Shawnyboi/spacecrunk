@@ -15,18 +15,17 @@ public class Ship : MonoBehaviour
         m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
         for (int i = 0; i < m_ModuleCollider.Count; i++)
         {
-            m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], new ModuleSlot());
+            m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], new ModuleSlot(this));
         }
-		Debug.Log(m_ColliderToModuleDictionary.Count);
     }
 
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
     {
-		if (m_ColliderToModuleDictionary.ContainsKey(c))
-		{
-			return m_ColliderToModuleDictionary[c];
-		}
-		return null;
+        if (m_ColliderToModuleDictionary.ContainsKey(c))
+        {
+            return m_ColliderToModuleDictionary[c];
+        }
+        return null;
     }
 
     public bool AddModule(Collider c, Module m)
@@ -40,9 +39,9 @@ public class Ship : MonoBehaviour
         {
             return false;
         }
-    }    
+    }
 
-    public Module RemoveModuleAtCollider(Collider c)      
+    public Module RemoveModuleAtCollider(Collider c)
     {
         ModuleSlot moduleToRemove = m_ColliderToModuleDictionary[c];
         m_ColliderToModuleDictionary[c] = null;
@@ -55,20 +54,27 @@ public class Ship : MonoBehaviour
 public class ModuleSlot
 {
     private Module m_Module = null;
+    private Ship m_Ship;
+    public ModuleSlot(Ship s)
+    {
+        m_Ship = s;
+    }
 
     //might be null
-	public Module Module => m_Module;
-    
+    public Module Module => m_Module;
+
     public void AddModule(Module m)
     {
-		// TODO make this take time
+        // TODO make this take time
         m_Module = m;
+        m_Module.AttachToShip(m_Ship);
     }
 
     public Module RemoveModule()
     {
-		// TODO make this take time
-		Module m = m_Module;
+        // TODO make this take time
+        Module m = m_Module;
+        m_Module.RemoveFromShip();
         m_Module = null;
         return m;
     }
