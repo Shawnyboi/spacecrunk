@@ -21,6 +21,8 @@ public class CrunkMover : MonoBehaviour
 
 	bool grounded = true;
 
+	public bool Stationary = false;
+
 	Vector3 externalForce = Vector3.zero ;
 
 	private void Start()
@@ -30,6 +32,9 @@ public class CrunkMover : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		//TODO Support rotation
+		//TODO instead of directly moving character move a point out in front that the player seeks (or pivots to)
+
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
@@ -37,14 +42,13 @@ public class CrunkMover : MonoBehaviour
 
 		var internalForce = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
 
-		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed))
+		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && !Stationary)
 		{
 			body.AddForce(internalForce);
 		}
 
 		if ((internalForce.sqrMagnitude + externalForce.sqrMagnitude) < Helper.Epsilon)
 		{
-
 			body.velocity *= grounded ? groundedDragFactor : floatingDragFactor;
 		}
 

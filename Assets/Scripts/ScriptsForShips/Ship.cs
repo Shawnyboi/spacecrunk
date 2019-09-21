@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Ship
+public class Ship : MonoBehaviour
 {
-    private List<ModuleSlot> m_Slots = new List<ModuleSlot>(4);
     private Dictionary<Collider, ModuleSlot> m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
     [SerializeField]
     private List<Collider> m_ModuleCollider = new List<Collider>(4);
@@ -14,9 +13,11 @@ public class Ship
     private void Start()
     {
         m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
-        for (int i = 0; i < 4; i++) {
-            m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], m_Slots[i]);
+        for (int i = 0; i < m_ModuleCollider.Count; i++)
+        {
+            m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], new ModuleSlot());
         }
+		Debug.Log(m_ColliderToModuleDictionary.Count);
     }
 
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
@@ -53,22 +54,21 @@ public class Ship
 
 public class ModuleSlot
 {
-
     private Module m_Module = null;
-    [SerializeField]
-    private Transform m_Transform;
 
     //might be null
 	public Module Module => m_Module;
     
     public void AddModule(Module m)
     {
+		// TODO make this take time
         m_Module = m;
     }
 
     public Module RemoveModule()
     {
-        Module m = m_Module;
+		// TODO make this take time
+		Module m = m_Module;
         m_Module = null;
         return m;
     }
@@ -77,10 +77,4 @@ public class ModuleSlot
     {
         return m_Module != null;
     }
-
-    public Quaternion GetDirection()
-    {
-        return m_Transform.rotation;
-    }
-
 }

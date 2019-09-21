@@ -26,12 +26,35 @@ public class CrunkInteract : MonoBehaviour
 		}
 		else
 		{
+			interactTime = 0;
 			if (interacting)
 			{
-				//var module = crunk.GetModule();
-				//if (module != null)
-				{
 
+
+
+				if (crunk.heldModule != null)
+				{
+					crunk.heldModule = null;
+				}
+				else if (crunk.nearbySlot != null)
+				{
+					var slottedModule = crunk.nearbySlot.Module;
+					Debug.Log(slottedModule == null);
+					if (slottedModule != null)
+					{
+						if (slottedModule.IsLockedIn())
+						{
+							slottedModule.LockOut();
+						}
+						else
+						{
+							slottedModule.LockIn(crunk);
+						}
+					}
+				}
+				else if (crunk.nearbyModule != null)
+				{
+					crunk.heldModule = crunk.nearbyModule;
 				}
 			}
 
@@ -50,10 +73,19 @@ public class CrunkInteract : MonoBehaviour
 			interactTime += Time.deltaTime;
 		}
 
-
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (holding)
 		{
-			GetComponent<CrunkMover>().ApplyExternalForce(new Vector3(1000, 0, 0));
+			if (crunk.nearbySlot != null)
+			{
+				if (crunk.heldModule != null)
+				{
+					crunk.nearbySlot.AddModule(crunk.heldModule);
+				}
+				else if (crunk.nearbySlot.Module != null)
+				{
+					crunk.nearbySlot.RemoveModule();
+				}
+			}
 		}
 	}
 }

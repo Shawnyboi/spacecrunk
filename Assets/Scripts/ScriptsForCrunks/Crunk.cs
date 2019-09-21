@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CrunkMover), typeof(CrunkInteract))]
 public class Crunk : MonoBehaviour
 {
 	//todo this should be private
@@ -11,6 +12,32 @@ public class Crunk : MonoBehaviour
 	public ModuleSlot nearbySlot;
 	public Module nearbyModule;
 	public Module heldModule;
+
+	private CrunkMover mover = null;
+	public CrunkMover Mover
+	{
+		get
+		{
+			if (mover == null)
+			{
+				mover = GetComponent<CrunkMover>();
+			}
+			return mover;
+		}
+	}
+	private CrunkInteract interact = null;
+	public CrunkInteract Interact
+	{
+		get
+		{
+			if (interact == null)
+			{
+				interact = GetComponent<CrunkInteract>();
+			}
+			return interact;
+		}
+	}
+
 
 	/*public Module GetModule()
 	{
@@ -50,12 +77,22 @@ public class Crunk : MonoBehaviour
 
 	private ModuleSlot FindModuleSlot(Collider other)
 	{
-		var slot = allyShip.GetModuleSlotAtCollider(other);
+		var slot = allyShip?.GetModuleSlotAtCollider(other);
 		if (slot == null)
 		{
-			slot = enemyShip.GetModuleSlotAtCollider(other);
+			slot = enemyShip?.GetModuleSlotAtCollider(other);
 		}
 
 		return slot;
+	}
+
+	public void PickupModule(Module module)
+	{
+		heldModule = module;
+	}
+
+	public void DropModule()
+	{
+		heldModule = null;
 	}
 }

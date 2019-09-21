@@ -14,16 +14,28 @@ abstract public class Module : MonoBehaviour
     protected Rigidbody m_ModuleRB;
     protected Collider m_ModuleCollider;
     protected Crunk m_CurrentCrunk = null;
+	protected Ship m_ParentShip = null;
 
     public void LockIn(Crunk c)
     {
         m_CurrentCrunk = c;
-        m_LockedIn = true;
+
+		if (m_CurrentCrunk != null)
+		{
+			m_CurrentCrunk.Mover.Stationary = true;
+		}
+
+		m_LockedIn = true;
     }
 
     public void LockOut()
     {
-        m_CurrentCrunk = null;
+		if (m_CurrentCrunk != null)
+		{
+			m_CurrentCrunk.Mover.Stationary = false;
+		}
+
+		m_CurrentCrunk = null;
         m_LockedIn = false;
     }
 
