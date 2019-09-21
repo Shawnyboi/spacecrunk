@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class Ship
 {
     private List<ModuleSlot> m_Slots = new List<ModuleSlot>(4);
     private Dictionary<Collider, ModuleSlot> m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
@@ -41,7 +41,7 @@ public class Ship : MonoBehaviour
         }
     }    
 
-    public Module RemoveModuleAtCollider(Collider c)
+    public Module RemoveModuleAtCollider(Collider c)      
     {
         ModuleSlot moduleToRemove = m_ColliderToModuleDictionary[c];
         m_ColliderToModuleDictionary[c] = null;
@@ -53,9 +53,12 @@ public class Ship : MonoBehaviour
 
 public class ModuleSlot
 {
-    private Module m_Module = null;
 
-	//TODO Better way?
+    private Module m_Module = null;
+    [SerializeField]
+    private Transform m_Transform;
+
+    //might be null
 	public Module Module => m_Module;
     
     public void AddModule(Module m)
@@ -73,6 +76,11 @@ public class ModuleSlot
     public bool ModuleOccupied()
     {
         return m_Module != null;
+    }
+
+    public Quaternion GetDirection()
+    {
+        return m_Transform.rotation;
     }
 
 }

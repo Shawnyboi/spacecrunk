@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engines : Module
+public class Airlock : Module
 {
-
-    override protected IEnumerator Fire()
+    protected override IEnumerator Fire()
     {
-        //Allow for ship movement for a time
+        //Take crunk and move him outside of ship
         yield return null;
     }
-
 }

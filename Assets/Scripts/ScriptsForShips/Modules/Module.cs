@@ -11,15 +11,25 @@ abstract public class Module : MonoBehaviour
     protected float m_MaxCharge;
     protected float m_ChargeTime;
     protected float m_ChargeDownTime;
+    protected Rigidbody m_ModuleRB;
+    protected Collider m_ModuleCollider;
+    protected Crunk m_CurrentCrunk = null;
 
-    public void LockIn()
+    public void LockIn(Crunk c)
     {
+        m_CurrentCrunk = c;
         m_LockedIn = true;
     }
 
     public void LockOut()
     {
+        m_CurrentCrunk = null;
         m_LockedIn = false;
+    }
+
+    public bool IsLockedIn()
+    {
+        return m_LockedIn;
     }
 
     public void PumpUp()
@@ -45,7 +55,7 @@ abstract public class Module : MonoBehaviour
             if (m_Charge > m_MaxCharge)
             {
                 //start firing
-                StartCoroutine(Fire());
+                StartCoroutine(FireRoutine());
             }
         } else
         {
@@ -63,7 +73,7 @@ abstract public class Module : MonoBehaviour
         m_Firing = false;
     }
 
-    protected IEnumerator Fire()
+    protected IEnumerator FireRoutine()
     {
         m_Firing = true;
         while (m_Charge > 0f)
@@ -73,4 +83,6 @@ abstract public class Module : MonoBehaviour
         }
         m_Firing = false;
     }
+
+    abstract protected IEnumerator Fire();
 }
