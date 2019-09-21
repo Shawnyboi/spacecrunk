@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd81263f0754024080d72afff897779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ModuleCollider: []
 --- !u!1 &579535445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,6 +1559,7 @@ GameObject:
   - component: {fileID: 2112587142}
   - component: {fileID: 2112587146}
   - component: {fileID: 2112587147}
+  - component: {fileID: 2112587148}
   m_Layer: 0
   m_Name: Crunk
   m_TagString: Untagged
@@ -1674,6 +1676,7 @@ MonoBehaviour:
   acceleration: 100
   groundedDragFactor: 0.6
   floatingDragFactor: 0.8
+  Stationary: 0
 --- !u!114 &2112587147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,7 +1689,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e39d0fba350f426b9694a7a3547d701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdThreshold: 0
+  holdThreshold: 0.5
+--- !u!114 &2112587148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112587140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3cf063fb5a844b69882bb6d43237a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allyShip: {fileID: 572741184}
+  enemyShip: {fileID: 0}
+  parentShip: {fileID: 0}
+  nearbyModule: {fileID: 0}
+  heldModule: {fileID: 0}
 --- !u!1 &515418099876628161
 GameObject:
   m_ObjectHideFlags: 0
