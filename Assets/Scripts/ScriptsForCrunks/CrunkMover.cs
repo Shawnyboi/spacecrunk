@@ -22,23 +22,18 @@ public class CrunkMover : MonoBehaviour
 		body = GetComponent<Rigidbody>();
 	}
 
-	private void Update()
-	{
-		
-	}
-
 	private void FixedUpdate()
 	{
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
-		var force = ((horizontalAxis * horizontal) + (verticalAxis * vertical)) * acceleration;
+		var force = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
+
 		body.AddForce(force);
 
 		if (body.velocity.sqrMagnitude > (maxSpeed * maxSpeed))
 		{
-			float speedScale = maxSpeed / body.velocity.magnitude;
-			body.velocity *= speedScale;
+			body.velocity = body.velocity.normalized * maxSpeed;
 		}
 	}
 }
