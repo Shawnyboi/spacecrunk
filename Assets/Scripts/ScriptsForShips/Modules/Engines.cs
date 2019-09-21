@@ -5,10 +5,10 @@ using UnityEngine;
 public class Engines : Module
 {
 
-    override protected IEnumerator Fire()
+    override protected void Fire()
     {
         //Allow for ship movement for a time
-        yield return null;
+        
     }
 
 }

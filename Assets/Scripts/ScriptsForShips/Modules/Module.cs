@@ -6,10 +6,12 @@ abstract public class Module : MonoBehaviour
 {
 
     protected bool m_LockedIn;
-    protected bool m_Firing;
+    protected bool m_Firing = false;
     protected float m_Charge;
-    protected float m_MaxCharge;
+    protected const float m_MaxCharge = 1;
+    [SerializeField]
     protected float m_ChargeTime;
+    [SerializeField]
     protected float m_ChargeDownTime;
     protected Rigidbody m_ModuleRB;
     protected Collider m_ModuleCollider;
@@ -36,7 +38,7 @@ abstract public class Module : MonoBehaviour
     {
         if (!m_Firing && m_LockedIn)
         {
-            m_Charge += m_MaxCharge / m_ChargeTime;
+            m_Charge += m_MaxCharge / m_ChargeTime * Time.deltaTime;
         }
     }
 
@@ -44,7 +46,7 @@ abstract public class Module : MonoBehaviour
     {
         if (m_Firing)
         {
-            m_Charge -= m_MaxCharge / m_ChargeDownTime;
+            m_Charge -=  m_MaxCharge / m_ChargeDownTime * Time.deltaTime;
         }
     }
 
@@ -52,19 +54,19 @@ abstract public class Module : MonoBehaviour
     {
         if (!m_Firing)
         {
-            if (m_Charge > m_MaxCharge)
+            if (m_Charge >= m_MaxCharge)
             {
                 //start firing
-                StartCoroutine(FireRoutine());
-            }
-        } else
-        {
-            if (m_Charge < 0f)
-            {
-                //stop firing
-                StopFiring();
+                Debug.Log("Starting firing");
+                StartFiring();
             }
         }
+    }
+
+    protected void StartFiring()
+    {
+        m_Firing = true;
+        StartCoroutine(FireRoutine());
     }
 
     protected void StopFiring()
@@ -75,14 +77,15 @@ abstract public class Module : MonoBehaviour
 
     protected IEnumerator FireRoutine()
     {
-        m_Firing = true;
         while (m_Charge > 0f)
         {
+            Fire();
             PumpDown();
             yield return null;
         }
-        m_Firing = false;
+        StopFiring();
+        yield return null;
     }
 
-    abstract protected IEnumerator Fire();
+    abstract protected void Fire();
 }

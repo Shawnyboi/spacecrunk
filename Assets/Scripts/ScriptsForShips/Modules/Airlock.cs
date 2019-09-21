@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Airlock : Module
 {
-    protected override IEnumerator Fire()
+    protected override void Fire()
     {
         //Take crunk and move him outside of ship
-        yield return null;
+        
     }
 }
