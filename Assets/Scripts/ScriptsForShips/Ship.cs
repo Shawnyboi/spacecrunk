@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+
     private Dictionary<Collider, ModuleSlot> m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
     [SerializeField]
     private List<Collider> m_ModuleCollider = new List<Collider>(4);
-    // Start is called before the first frame update
-
+    [SerializeField]
+    private float m_OxygenDecayRate = 1f;
+    private float m_OxygenPercent = 100f;
+    
     private void Start()
     {
         m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
@@ -46,6 +49,19 @@ public class Ship : MonoBehaviour
         ModuleSlot moduleToRemove = m_ColliderToModuleDictionary[c];
         m_ColliderToModuleDictionary[c] = null;
         return moduleToRemove.RemoveModule();
+    }
+
+    private void Update()
+    {
+        if (m_OxygenPercent > 0)
+        {
+            m_OxygenPercent = Mathf.Max(m_OxygenPercent - m_OxygenDecayRate, 0);
+        }
+    }
+
+    public void AddOxygen(float amt)
+    {
+        m_OxygenPercent = Mathf.Min(m_OxygenPercent + amt, 100f);
     }
 
 }
