@@ -86,13 +86,14 @@ public class Crunk : MonoBehaviour
 
 		if (moduleCollider != null)
 		{
+			Debug.Log("exitting module collider");
 			if (nearbyModule == null ||
 				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
 			{
 				nearbyModule = moduleCollider.targetModule;
 			}
 		}
-		else if (airlock == nearbyAirlock)
+		else if (airlock != null && airlock == nearbyAirlock)
 		{
 			nearbyAirlock = null;
 		}
