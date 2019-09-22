@@ -23,6 +23,7 @@ public class CrunkMover : MonoBehaviour
 	[SerializeField]
 	float floatingDragFactor = 0.8f;
 	bool grounded = true;
+	bool wasGrounded = true;
     bool moving = false;
 
     public void setGrounded(bool b) => grounded = b;
@@ -46,7 +47,7 @@ public class CrunkMover : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (grounded && crunk.parentShip != null)
+		if (grounded && wasGrounded && crunk.parentShip != null)
 		{
 			body.position = crunk.parentShip.transform.TransformPoint(lastFrameShipPosition) + body.velocity * Time.deltaTime;
 		}
@@ -71,7 +72,7 @@ public class CrunkMover : MonoBehaviour
             }
         }
 
-		body.AddForce(externalForce);
+		body.AddForce(externalForce, ForceMode.Impulse);
 
 		var internalForce = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
 
@@ -99,7 +100,7 @@ public class CrunkMover : MonoBehaviour
         {
             lastFrameShipPosition = myShip.transform.InverseTransformPoint(body.position);
         }
-      
+		wasGrounded = grounded;
     }
 
 	public void ApplyExternalForce(Vector3 force)
