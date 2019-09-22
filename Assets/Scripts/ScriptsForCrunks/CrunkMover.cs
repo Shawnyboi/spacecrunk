@@ -72,7 +72,12 @@ public class CrunkMover : MonoBehaviour
 
 			body.velocity *= grounded ? groundedDragFactor : floatingDragFactor;
 		}
-        body.position += shipTranslation;
+
+		if (grounded)
+		{
+			body.position += shipTranslation;
+		}
+
 		externalForce = Vector3.zero;
         if (myShip != null)
         {
