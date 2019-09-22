@@ -139,13 +139,18 @@ public class CrunkInteract : MonoBehaviour
 				}
 				else if (crunk.nearbySlot.Module != null)
 				{
+					Debug.Log("Dettaching");
+
+
 					var slotAnimation = crunk.nearbySlot.Module.GetComponentInParent<ModuleSlotAnimation>();
 					if (slotAnimation)
 					{
 						slotAnimation.FinishDettaching();
 					}
 
+					Module detachingModule = crunk.nearbySlot.Module;
 					crunk.nearbySlot.RemoveModule();
+					crunk.PickupModule(detachingModule);
 					holdingDownButton = false;
 					canHoldButton = false;
 
@@ -156,6 +161,7 @@ public class CrunkInteract : MonoBehaviour
 
     private void AttachModuleToShipFromHand()
     {
+		Debug.Log("Attaching");
         Module m = crunk.grabbedModule;
         crunk.DropModule(false);
         crunk.nearbySlot.AddModule(m);
