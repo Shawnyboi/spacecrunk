@@ -8,8 +8,7 @@ public class Gun : Module
     protected Transform m_FirePoint;
     [SerializeField]
     protected GameObject m_Projectile;
-    [SerializeField]
-    private float m_MaxRotation;
+    
 
     private float rechargeTime = .025f;
     private float timePassedSinceLastShot = 0f;
@@ -33,7 +32,7 @@ public class Gun : Module
     }
 
     /* uncomment for testing*/
-    private void Start()
+    /*private void Start()
     {
         m_TestFire();
     }
@@ -53,5 +52,5 @@ public class Gun : Module
             Turn(true);
         }
     }
-
+    */
 }

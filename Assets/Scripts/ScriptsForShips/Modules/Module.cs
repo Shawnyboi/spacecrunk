@@ -91,6 +91,14 @@ abstract public class Module : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rigidbody.angularVelocity = new Vector3(0, 0, Random.Range(-1f, 1f));
+        m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), 0f);
+    }
+
+
     protected void StartFiring()
     {
         m_Firing = true;
