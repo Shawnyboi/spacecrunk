@@ -129,7 +129,7 @@ MonoBehaviour:
   m_ChargeTime: 3
   m_ChargeDownTime: 1
   m_ParentShip: {fileID: 0}
-  m_ForcePoint: {fileID: 0}
+  m_ForcePoint: {fileID: 9089295686471809527}
   m_EngineForceMagnitude: 0.5
 --- !u!1 &8649745930414701952
 GameObject:
@@ -174,8 +174,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.642355, y: 1, z: 1.229718}
-  m_Center: {x: 0.32117748, y: 0, z: -0.025074363}
+  m_Size: {x: 2.172134, y: 1.5180764, z: 2.5561779}
+  m_Center: {x: 0.29767916, y: 0.2590382, z: -0.0061944723}
 --- !u!114 &5853910027956687066
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,6 +27,11 @@ public class Ship : MonoBehaviour
         }
     }
 
+    public Collider GetColliderFromModuleSlot(ModuleSlot ms)
+    {
+        return m_ColliderToModuleDictionary.FirstOrDefault(x => x.Value == ms).Key;
+    }
+
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
     {
         if (m_ColliderToModuleDictionary.ContainsKey(c))
@@ -88,6 +93,10 @@ public class ModuleSlot
     {
         // TODO make this take time
         m_Module = m;
+        Collider c = m_Ship.GetColliderFromModuleSlot(this);
+        m_Module.transform.parent = c.transform;
+        m_Module.transform.LookAt(m_Module.transform.position + c.transform.forward);
+        m_Module.GetComponent<Rigidbody>().isKinematic = true;
         m_Module.AttachToShip(m_Ship);
     }
 

@@ -25,7 +25,8 @@ public class Engines : Module
         Rigidbody parentRB = m_ParentShip.GetComponent<Rigidbody>();
         parentRB.AddForceAtPosition(m_ForcePoint.forward * m_EngineForceMagnitude, m_ForcePoint.position);
     }
-
+    /*uncomment for testing*/
+    /*
     private void TestFire()
     {
         m_Charge = m_MaxCharge;
@@ -48,5 +49,5 @@ public class Engines : Module
         {
             TestFire();
         }
-    }
+    }*/
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class CrunkInteract : MonoBehaviour
 {
 	bool interacting = false;// these flags should be enum states
-	bool holding = false;
-	bool canHold = true;
+	bool holdingDownButton = false;
+	bool canHoldButton = true;
 	float interactTime = 0;
 
 	[SerializeField]
@@ -23,20 +23,20 @@ public class CrunkInteract : MonoBehaviour
 	{
 		if (Input.GetAxis("Interact") > Helper.Epsilon)
 		{
-			interacting = !holding;
+			interacting = !holdingDownButton;
 		}
 		else
 		{
 			interactTime = 0;
-			canHold = true;
+			canHoldButton = true;
 			if (interacting)
 			{
 				if (crunk.nearbyAirlock != null)
 				{
-					if (crunk.heldModule != null)
+					if (crunk.grabbedModule != null)
 					{
 						crunk.DropModule();
-					}
+					} 
 
 					if (crunk.parentShip == null)
 					{
@@ -47,7 +47,7 @@ public class CrunkInteract : MonoBehaviour
 						crunk.nearbyAirlock.LeaveShip(crunk.Mover);
 					}
 				}
-				else if (crunk.heldModule != null)
+				else if (crunk.grabbedModule != null)
 				{
 					crunk.DropModule();
 				}
@@ -73,7 +73,7 @@ public class CrunkInteract : MonoBehaviour
 			}
 
 			interacting = false;
-			holding = false;
+			holdingDownButton = false;
 		}
 
 		if (interacting)
@@ -81,28 +81,29 @@ public class CrunkInteract : MonoBehaviour
 			if (interactTime >= holdThreshold)
 			{
 				interacting = false;
-				holding = canHold;
+				holdingDownButton = canHoldButton;
 			}
 
 			interactTime += Time.deltaTime;
 		}
 
-		if (holding)
+		if (holdingDownButton)
 		{
 			if (crunk.nearbySlot != null)
 			{
-				if (crunk.heldModule != null)
+				if (crunk.grabbedModule != null)
 				{
-					crunk.nearbySlot.AddModule(crunk.heldModule);
-					crunk.DropModule();
-					holding = false;
-					canHold = false;
+                    Module m = crunk.grabbedModule;
+                    crunk.DropModule();
+                    crunk.nearbySlot.AddModule(m);
+					holdingDownButton = false;
+					canHoldButton = false;
 				}
 				else if (crunk.nearbySlot.Module != null)
 				{
 					crunk.nearbySlot.RemoveModule();
-					holding = false;
-					canHold = false;
+					holdingDownButton = false;
+					canHoldButton = false;
 				}
 			}
 		}

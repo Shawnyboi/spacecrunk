@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CrunkMover : MonoBehaviour
 {
-    Crunk crunk;
+    public Crunk crunk;
     Rigidbody body = null;
     Ship myShip;
     Vector3 lastFrameShipPosition;

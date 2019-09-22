@@ -35,7 +35,10 @@ abstract public class Module : MonoBehaviour
 
 		if (m_CurrentCrunk != null)
 		{
-			m_CurrentCrunk.Mover.Stationary = true;
+            if (m_CurrentCrunk.parentShip != null)
+            {
+                m_CurrentCrunk.Mover.Stationary = true;
+            }
 		}
 
 		m_LockedIn = true;
