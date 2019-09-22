@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TurnSpeed: 10
   m_MaxArc: 20
-  m_ChargeTime: 5
+  m_ChargeTime: 0.5
   m_ChargeDownTime: 0.5
   m_ParentShip: {fileID: 0}
   m_FirePoint: {fileID: 1117914978683019482}
