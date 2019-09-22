@@ -30,7 +30,7 @@ abstract public class Module : MonoBehaviour
     public void AttachToShip(Ship s) { m_ParentShip = s; }
 
     public void RemoveFromShip() { m_ParentShip = null; }
-    public void LockIn(Crunk c)
+    public void LockIn(Crunk c, ModuleSlot slot)
     {
         m_CurrentCrunk = c;
 
@@ -38,7 +38,7 @@ abstract public class Module : MonoBehaviour
 		{
             if (m_CurrentCrunk.parentShip == m_ParentShip)
             {
-                m_CurrentCrunk.Mover.Stationary = true;
+				m_CurrentCrunk.lockedSlot = slot;
             }
 		}
 
@@ -49,7 +49,7 @@ abstract public class Module : MonoBehaviour
     {
 		if (m_CurrentCrunk != null)
 		{
-			m_CurrentCrunk.Mover.Stationary = false;
+			m_CurrentCrunk.lockedSlot = null;
 		}
 
 		m_CurrentCrunk = null;

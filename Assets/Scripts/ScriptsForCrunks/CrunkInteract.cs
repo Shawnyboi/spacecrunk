@@ -56,45 +56,58 @@ public class CrunkInteract : MonoBehaviour
 				slotCollider.GetComponent<ModuleSlotAnimation>().StopTransitioning();
 			}
 
-			if (interacting && !crunk.Mover.Stationary)
+			ModuleSlot nearbySlot = crunk.lockedSlot ?? crunk.nearbySlot;
+
+			if (interacting)
 			{
 				if (crunk.nearbyAirlock != null)
 				{
-                    if (crunk.nearbyAirlock.GetTeam() == crunk.GetTeam())
-                    {
-                        if (crunk.grabbedModule != null)
-                        {
-                            crunk.DropModule(true);
-                        }
+					if (crunk.lockedSlot == null)
+					{
+						if (crunk.nearbyAirlock.GetTeam() == crunk.GetTeam())
+						{
+							if (crunk.grabbedModule != null)
+							{
+								crunk.DropModule(true);
+							}
 
-                        if (crunk.parentShip == null)
-                        {
-                            crunk.nearbyAirlock.EnterShip(crunk.Mover);
-                        }
-                        else
-                        {
-                            crunk.nearbyAirlock.LeaveShip(crunk.Mover);
-                        }
-                    }
+							if (crunk.parentShip == null)
+							{
+								crunk.nearbyAirlock.EnterShip(crunk.Mover);
+							}
+							else
+							{
+								crunk.nearbyAirlock.LeaveShip(crunk.Mover);
+							}
+						}
+					}
 				}
 				else if (crunk.grabbedModule != null)
 				{
 					crunk.DropModule(true);
 				}
-				else if (crunk.nearbySlot != null)
+				else if (nearbySlot != null)
 				{
-                    if (crunk.nearbySlot.GetShip().GetTeam() == crunk.GetTeam())
+                    if (nearbySlot.GetShip().GetTeam() == crunk.GetTeam())
                     {
-                        var slottedModule = crunk.nearbySlot.Module;
-                        if (slottedModule != null)
+                        var slottedModule = nearbySlot.Module;
+
+						if (slottedModule != null)
                         {
                             if (slottedModule.IsLockedIn())
                             {
                                 slottedModule.LockOut();
-                            }
+
+								// Turn off hinter on module slot.
+								var hinter = slottedModule.GetComponentInParent<EventsForToggle>();
+								if (hinter != null)
+								{
+									hinter.TriggerPositive();
+								}
+							}
                             else
                             {
-                                slottedModule.LockIn(crunk);
+								slottedModule.LockIn(crunk, nearbySlot);
 								crunk.transform.LookAt(slottedModule.transform.position);
 
 								// Turn off hinter on module slot.
@@ -129,7 +142,7 @@ public class CrunkInteract : MonoBehaviour
 			interactTime += Time.deltaTime;
 		}
 
-		if (holdingDownButton && canHoldButton && !crunk.Mover.Stationary)
+		if (holdingDownButton && canHoldButton && crunk.lockedSlot == null)
 		{
 			if (crunk.nearbySlot != null && crunk.parentShip == null)
 			{
@@ -139,9 +152,6 @@ public class CrunkInteract : MonoBehaviour
 				}
 				else if (crunk.nearbySlot.Module != null)
 				{
-					Debug.Log("Dettaching");
-
-
 					var slotAnimation = crunk.nearbySlot.Module.GetComponentInParent<ModuleSlotAnimation>();
 					if (slotAnimation)
 					{
@@ -161,7 +171,6 @@ public class CrunkInteract : MonoBehaviour
 
     private void AttachModuleToShipFromHand()
     {
-		Debug.Log("Attaching");
         Module m = crunk.grabbedModule;
         crunk.DropModule(false);
         crunk.nearbySlot.AddModule(m);

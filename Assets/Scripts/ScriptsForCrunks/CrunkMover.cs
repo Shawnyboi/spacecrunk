@@ -28,8 +28,6 @@ public class CrunkMover : MonoBehaviour
 
     public void setGrounded(bool b) => grounded = b;
 
-	public bool Stationary = false;
-
 	Vector3 externalForce = Vector3.zero ;
 
 	private void Start()
@@ -55,7 +53,7 @@ public class CrunkMover : MonoBehaviour
 		var horizontal = Input.GetAxis($"Horizontal{crunk.playerNumber}");
 		var vertical = Input.GetAxis($"Vertical{crunk.playerNumber}");
 
-        if((horizontal != 0 || vertical != 0) && !Stationary)
+        if((horizontal != 0 || vertical != 0) && crunk.lockedSlot == null)
         {
             if (moving == false)
             {
@@ -82,12 +80,12 @@ public class CrunkMover : MonoBehaviour
 			lookAt = transform.position + internalForce;
 		}
 
-		if (!Stationary)
+		if (crunk.lockedSlot == null)
 		{
 			transform.LookAt(lookAt);
 		}
 
-		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && !Stationary)
+		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && crunk.lockedSlot == null)
 		{
 			body.AddForce(internalForce);
 		}

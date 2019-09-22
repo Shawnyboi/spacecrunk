@@ -16,7 +16,7 @@ public class CrunkPump : MonoBehaviour
 	{
 		if (Input.GetAxis($"Charge{crunk.playerNumber}") > Helper.Epsilon)
 		{
-			if (!alreadyPumped && crunk.Mover.Stationary && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
+			if (!alreadyPumped && crunk.lockedSlot != null && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
 			{
 				bool pumping = crunk.nearbySlot.Module.PumpUp();
 			}

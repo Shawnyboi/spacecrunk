@@ -10,6 +10,7 @@ public class Crunk : MonoBehaviour
 	public Ship enemyShip = null;
 	public Ship parentShip = null;
 	public ModuleSlot nearbySlot;
+	public ModuleSlot lockedSlot;
 	public Module nearbyModule;
 	public Module grabbedModule;
 	public Airlock nearbyAirlock;
