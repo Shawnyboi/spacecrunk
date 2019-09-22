@@ -55,6 +55,7 @@ public class CrunkInteract : MonoBehaviour
 				else if (crunk.nearbySlot != null)
 				{
 					var slottedModule = crunk.nearbySlot.Module;
+					Debug.Log("Locking in " + slottedModule);
 					if (slottedModule != null)
 					{
 						if (slottedModule.IsLockedIn())
@@ -88,7 +89,7 @@ public class CrunkInteract : MonoBehaviour
 			interactTime += Time.deltaTime;
 		}
 
-		if (holdingDownButton)
+		if (holdingDownButton && canHoldButton)
 		{
 			if (crunk.nearbySlot != null)
 			{
