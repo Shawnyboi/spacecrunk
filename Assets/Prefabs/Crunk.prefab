@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1480182023976455680}
   - component: {fileID: 1480182023976455687}
   - component: {fileID: 1767612640}
+  - component: {fileID: 7425523097318513543}
   m_Layer: 10
   m_Name: Crunk
   m_TagString: Untagged
@@ -51,7 +52,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &1480182023976455693
 CapsuleCollider:
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a07932f533440f7b27e66cc3ef7db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crunk: {fileID: 0}
+  crunk: {fileID: 1480182023976455687}
   horizontalAxis: {x: 1, y: 0, z: 0}
   verticalAxis: {x: 0, y: 0, z: 1}
   maxSpeed: 5
@@ -136,6 +137,18 @@ MonoBehaviour:
   isHoldingSomething: 0
   isPumping: 0
   anim: {fileID: 506567624456130808}
+--- !u!114 &7425523097318513543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480182023976455695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e010bd28abe794823a70ff77d0cdb072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2565370485355354974
 PrefabInstance:
   m_ObjectHideFlags: 0

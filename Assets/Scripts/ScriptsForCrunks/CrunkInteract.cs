@@ -30,7 +30,7 @@ public class CrunkInteract : MonoBehaviour
 		{
 			interactTime = 0;
 			canHoldButton = true;
-			if (interacting)
+			if (interacting && !crunk.Mover.Stationary)
 			{
 				if (crunk.nearbyAirlock != null)
 				{
@@ -55,7 +55,6 @@ public class CrunkInteract : MonoBehaviour
 				else if (crunk.nearbySlot != null)
 				{
 					var slottedModule = crunk.nearbySlot.Module;
-					Debug.Log("Locking in " + slottedModule);
 					if (slottedModule != null)
 					{
 						if (slottedModule.IsLockedIn())
@@ -73,10 +72,15 @@ public class CrunkInteract : MonoBehaviour
 					crunk.PickupModule(crunk.nearbyModule);
 				}
 			}
+			else
+			{
+
+			}
 
 			interacting = false;
 			holdingDownButton = false;
 		}
+
 
 		if (interacting)
 		{
@@ -89,9 +93,9 @@ public class CrunkInteract : MonoBehaviour
 			interactTime += Time.deltaTime;
 		}
 
-		if (holdingDownButton && canHoldButton)
+		if (holdingDownButton && canHoldButton && !crunk.Mover.Stationary)
 		{
-			if (crunk.nearbySlot != null)
+			if (crunk.nearbySlot != null && crunk.parentShip == null)
 			{
 				if (crunk.grabbedModule != null)
 				{

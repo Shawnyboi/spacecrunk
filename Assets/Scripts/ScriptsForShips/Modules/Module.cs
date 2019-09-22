@@ -21,6 +21,7 @@ abstract public class Module : MonoBehaviour
     protected Rigidbody m_ModuleRB;
     protected Collider m_ModuleCollider;
     protected Crunk m_CurrentCrunk = null;
+	public Crunk CurrentCrunk => m_CurrentCrunk;
     [SerializeField] //serializing for testing purposes
     protected Ship m_ParentShip;
     protected Rigidbody m_Rigidbody;
@@ -35,7 +36,7 @@ abstract public class Module : MonoBehaviour
 
 		if (m_CurrentCrunk != null)
 		{
-            if (m_CurrentCrunk.parentShip != null)
+            if (m_CurrentCrunk.parentShip == m_ParentShip)
             {
                 m_CurrentCrunk.Mover.Stationary = true;
             }
@@ -60,12 +61,14 @@ abstract public class Module : MonoBehaviour
         return m_LockedIn;
     }
 
-    public void PumpUp()
+    public bool PumpUp()
     {
         if (!m_Firing && m_LockedIn)
         {
             m_Charge += m_MaxCharge / m_ChargeTime * Time.deltaTime;
+			return true;
         }
+		return false;
     }
 
     protected void PumpDown()
