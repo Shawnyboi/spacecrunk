@@ -86,19 +86,21 @@ public class Crunk : MonoBehaviour
 
 		if (moduleCollider != null)
 		{
+			Debug.Log("exitting module collider");
 			if (nearbyModule == null ||
 				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
 			{
 				nearbyModule = moduleCollider.targetModule;
 			}
 		}
-		else if (airlock == nearbyAirlock)
+		else if (airlock != null && airlock == nearbyAirlock)
 		{
 			nearbyAirlock = null;
 		}
 		else
 		{
 			var slot = FindModuleSlot(other);
+			Debug.Log("attempting to exit slot " + slot);
 			if (slot == nearbySlot)
 			{
 				nearbySlot = null;
@@ -128,7 +130,7 @@ public class Crunk : MonoBehaviour
 	public void DropModule()
 	{
         Debug.Log("Dropping module : " + grabbedModule.name);
-		grabbedModule.transform.SetSiblingIndex(0);
+		grabbedModule.transform.parent = null;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = false;
 		grabbedModule = null;
 	}
