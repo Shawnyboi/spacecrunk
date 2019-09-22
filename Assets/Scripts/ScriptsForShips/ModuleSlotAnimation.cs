@@ -12,29 +12,23 @@ public class ModuleSlotAnimation : MonoBehaviour
 	{
 		attachAnimator.SetBool(attachFlag, false);
 		attachAnimator.SetBool(transitionFlag, true);
-		Debug.Log("Attaching");
 	}
 
 	public void FinishAttaching()
 	{
 		attachAnimator.SetBool(transitionFlag, false);
 		attachAnimator.SetBool(attachFlag, true);
-		Debug.Log("Attached");
 
 	}
 
 	public void BeginDettaching()
 	{
-		Debug.Log("Dettaching");
-
 		attachAnimator.SetBool(attachFlag, true);
 		attachAnimator.SetBool(transitionFlag, true);
 	}
 
 	public void FinishDettaching()
 	{
-		Debug.Log("Dettached");
-
 		attachAnimator.SetBool(transitionFlag, false);
 		attachAnimator.SetBool(attachFlag, false);
 	}

@@ -49,6 +49,13 @@ public class CrunkInteract : MonoBehaviour
 		{
 			interactTime = 0;
 			canHoldButton = true;
+
+			var slotCollider = crunk.allyShip.GetColliderFromModuleSlot(crunk.nearbySlot);
+			if (slotCollider != null)
+			{
+				slotCollider.GetComponent<ModuleSlotAnimation>().StopTransitioning();
+			}
+
 			if (interacting && !crunk.Mover.Stationary)
 			{
 				if (crunk.nearbyAirlock != null)
