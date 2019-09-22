@@ -20,8 +20,13 @@ abstract public class Module : MonoBehaviour
     protected Rigidbody m_ModuleRB;
     protected Collider m_ModuleCollider;
     protected Crunk m_CurrentCrunk = null;
-	protected Ship m_ParentShip = null;
+    [SerializeField] //serializing for testing purposes
+    protected Ship m_ParentShip;
 
+
+    public void AttachToShip(Ship s) { m_ParentShip = s; }
+
+    public void RemoveFromShip() { m_ParentShip = null; }
     public void LockIn(Crunk c)
     {
         m_CurrentCrunk = c;
@@ -66,7 +71,7 @@ abstract public class Module : MonoBehaviour
         }
     }
 
-    protected void Update()
+     void Update()
     {
         if (!m_Firing)
         {
