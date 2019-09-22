@@ -18,6 +18,9 @@ public class Crunk : MonoBehaviour
 
 	private CrunkMover mover = null;
     private CrunkAnimation crunkAnimation = null;
+    private int team;
+
+    public int GetTeam() { return team; }
 	public CrunkMover Mover
 	{
 		get
@@ -44,6 +47,7 @@ public class Crunk : MonoBehaviour
 
 	private void Start()
 	{
+        team = allyShip.GetTeam();
         crunkAnimation = GetComponent<CrunkAnimation>();
 		if (moduleContainer == null)
 		{

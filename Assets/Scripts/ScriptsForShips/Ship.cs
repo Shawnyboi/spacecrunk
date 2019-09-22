@@ -19,7 +19,8 @@ public class Ship : MonoBehaviour
     private float m_OxygenDecayRate = 1f;
     private float m_OxygenPercent = 100f;
     protected Rigidbody m_Rigidbody;
-    
+    [SerializeField]
+    private int m_Team;
     private void Start()
     {
         for(int i = 0; i < 3; i++)
@@ -49,6 +50,8 @@ public class Ship : MonoBehaviour
         }
         return null;
     }
+
+    public int GetTeam() { return m_Team; }
 
     public bool AddModule(Collider c, Module m)
     {
@@ -90,6 +93,8 @@ public class ModuleSlot
 {
     private Module m_Module = null;
     private Ship m_Ship;
+
+    public Ship GetShip() { return m_Ship; }
     public ModuleSlot(Ship s)
     {
         m_Ship = s;

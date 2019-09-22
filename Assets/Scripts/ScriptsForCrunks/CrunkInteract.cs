@@ -34,19 +34,22 @@ public class CrunkInteract : MonoBehaviour
 			{
 				if (crunk.nearbyAirlock != null)
 				{
-					if (crunk.grabbedModule != null)
-					{
-						crunk.DropModule();
-					} 
+                    if (crunk.nearbyAirlock.GetTeam() == crunk.GetTeam())
+                    {
+                        if (crunk.grabbedModule != null)
+                        {
+                            crunk.DropModule();
+                        }
 
-					if (crunk.parentShip == null)
-					{
-						crunk.nearbyAirlock.EnterShip(crunk.Mover);
-					}
-					else
-					{
-						crunk.nearbyAirlock.LeaveShip(crunk.Mover);
-					}
+                        if (crunk.parentShip == null)
+                        {
+                            crunk.nearbyAirlock.EnterShip(crunk.Mover);
+                        }
+                        else
+                        {
+                            crunk.nearbyAirlock.LeaveShip(crunk.Mover);
+                        }
+                    }
 				}
 				else if (crunk.grabbedModule != null)
 				{
@@ -54,18 +57,21 @@ public class CrunkInteract : MonoBehaviour
 				}
 				else if (crunk.nearbySlot != null)
 				{
-					var slottedModule = crunk.nearbySlot.Module;
-					if (slottedModule != null)
-					{
-						if (slottedModule.IsLockedIn())
-						{
-							slottedModule.LockOut();
-						}
-						else
-						{
-							slottedModule.LockIn(crunk);
-						}
-					}
+                    if (crunk.nearbySlot.GetShip().GetTeam() == crunk.GetTeam())
+                    {
+                        var slottedModule = crunk.nearbySlot.Module;
+                        if (slottedModule != null)
+                        {
+                            if (slottedModule.IsLockedIn())
+                            {
+                                slottedModule.LockOut();
+                            }
+                            else
+                            {
+                                slottedModule.LockIn(crunk);
+                            }
+                        }
+                    }
 				}
 				else if (crunk.nearbyModule != null)
 				{
@@ -99,11 +105,7 @@ public class CrunkInteract : MonoBehaviour
 			{
 				if (crunk.grabbedModule != null)
 				{
-                    Module m = crunk.grabbedModule;
-                    crunk.DropModule();
-                    crunk.nearbySlot.AddModule(m);
-					holdingDownButton = false;
-					canHoldButton = false;
+                    AttachModuleToShipFromHand();
 				}
 				else if (crunk.nearbySlot.Module != null)
 				{
@@ -114,4 +116,13 @@ public class CrunkInteract : MonoBehaviour
 			}
 		}
 	}
+
+    private void AttachModuleToShipFromHand()
+    {
+        Module m = crunk.grabbedModule;
+        crunk.DropModule();
+        crunk.nearbySlot.AddModule(m);
+        holdingDownButton = false;
+        canHoldButton = false;
+    }
 }

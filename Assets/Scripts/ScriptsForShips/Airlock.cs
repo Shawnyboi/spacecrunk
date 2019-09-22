@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Airlock : MonoBehaviour
 {
-    [SerializeField]
-    protected GameObject m_ShipImAttachedTo;
+    public GameObject m_ShipImAttachedTo;
+    private int m_Team;
     [SerializeField]
     protected float m_AirlockForce;
 	[SerializeField]
@@ -13,6 +13,13 @@ public class Airlock : MonoBehaviour
     [SerializeField]
     protected Transform m_GoThroughAirlockVector;
 
+
+    private void Start()
+    {
+        m_Team = m_ShipImAttachedTo.GetComponent<Ship>().GetTeam();
+    }
+
+    public int GetTeam() { return m_Team; }
     public void LeaveShip(CrunkMover cm)
     {
         cm.crunk.TriggerAirlockAnimation(true);
