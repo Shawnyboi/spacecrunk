@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 8981984805476530347}
   - component: {fileID: 9137327329171388482}
   - component: {fileID: 2771983039988892790}
+  - component: {fileID: 2395497444679040444}
   m_Layer: 0
   m_Name: InteractTrigger
   m_TagString: Untagged
@@ -190,6 +191,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetModule: {fileID: 644088543125640203}
+--- !u!114 &2395497444679040444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265099590479519984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a78dc18dbaf84636b46c4cc78696775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPositive:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegative:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8537397560805096102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,11 +216,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6421896555274446976}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 955dbda7206b2ae4ebdc3f6e0440e105,
-        type: 3}
-      propertyPath: m_Name
-      value: Cannon_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 955dbda7206b2ae4ebdc3f6e0440e105,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -256,6 +270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 955dbda7206b2ae4ebdc3f6e0440e105,
+        type: 3}
+      propertyPath: m_Name
+      value: Cannon_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 955dbda7206b2ae4ebdc3f6e0440e105, type: 3}

@@ -76,6 +76,12 @@ public class Crunk : MonoBehaviour
 				nearbySlot = slot;
 			}
 		}
+
+		var events = other.GetComponent<EventsForToggle>();
+		if (events != null)
+		{
+			events.TriggerPositive();
+		}
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -98,6 +104,12 @@ public class Crunk : MonoBehaviour
 			{
 				nearbySlot = null;
 			}
+		}
+
+		var events = other.GetComponent<EventsForToggle>();
+		if (events != null)
+		{
+			events.TriggerNegative();
 		}
 	}
 

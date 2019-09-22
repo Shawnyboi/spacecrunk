@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 625229797281228819}
   - component: {fileID: 674876821012499442}
   - component: {fileID: 5853910027956687066}
+  - component: {fileID: 7497347519501714108}
   m_Layer: 0
   m_Name: InteractTrigger
   m_TagString: Untagged
@@ -189,6 +190,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetModule: {fileID: 1387132431935581950}
+--- !u!114 &7497347519501714108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649745930414701952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a78dc18dbaf84636b46c4cc78696775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPositive:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegative:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4979868150138558400
 PrefabInstance:
   m_ObjectHideFlags: 0
