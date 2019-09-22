@@ -25,5 +25,20 @@ public class CrunkPump : MonoBehaviour
 		{
 			alreadyPumped = false;
 		}
+        var horizontalInput = Input.GetAxis($"Horizontal{crunk.playerNumber}");
+        if (horizontalInput > Helper.Epsilon || horizontalInput < -Helper.Epsilon)
+        {
+            if(crunk.Mover.Stationary && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
+            {
+                if(horizontalInput > 0)
+                {
+                    crunk.nearbySlot.Module.Turn(true);
+                }
+                else
+                {
+                    crunk.nearbySlot.Module.Turn(false);
+                }
+            }
+        }
 	}
 }
