@@ -41,7 +41,7 @@ public class CrunkMover : MonoBehaviour
 
 		var internalForce = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
 
-		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed))
+		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && !Stationary)
 		{
 			body.AddForce(internalForce);
 		}

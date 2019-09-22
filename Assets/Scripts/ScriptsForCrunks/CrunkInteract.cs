@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CrunkInteract : MonoBehaviour
 {
-	bool interacting = false;
+	bool interacting = false;// these flags should be enum states
 	bool holding = false;
+	bool canHold = true;
 	float interactTime = 0;
 
 	[SerializeField]
@@ -27,19 +28,17 @@ public class CrunkInteract : MonoBehaviour
 		else
 		{
 			interactTime = 0;
+			canHold = true;
 			if (interacting)
 			{
-
-
-
 				if (crunk.heldModule != null)
 				{
-					crunk.heldModule = null;
+					crunk.DropModule();
 				}
 				else if (crunk.nearbySlot != null)
 				{
 					var slottedModule = crunk.nearbySlot.Module;
-					Debug.Log(slottedModule == null);
+					Debug.Log("slotted module " + slottedModule);
 					if (slottedModule != null)
 					{
 						if (slottedModule.IsLockedIn())
@@ -48,13 +47,14 @@ public class CrunkInteract : MonoBehaviour
 						}
 						else
 						{
+							Debug.Log("Locking in");
 							slottedModule.LockIn(crunk);
 						}
 					}
 				}
 				else if (crunk.nearbyModule != null)
 				{
-					crunk.heldModule = crunk.nearbyModule;
+					crunk.PickupModule(crunk.nearbyModule);
 				}
 			}
 
@@ -67,7 +67,7 @@ public class CrunkInteract : MonoBehaviour
 			if (interactTime >= holdThreshold)
 			{
 				interacting = false;
-				holding = true;
+				holding = canHold;
 			}
 
 			interactTime += Time.deltaTime;
@@ -80,10 +80,15 @@ public class CrunkInteract : MonoBehaviour
 				if (crunk.heldModule != null)
 				{
 					crunk.nearbySlot.AddModule(crunk.heldModule);
+					crunk.DropModule();
+					holding = false;
+					canHold = false;
 				}
 				else if (crunk.nearbySlot.Module != null)
 				{
 					crunk.nearbySlot.RemoveModule();
+					holding = false;
+					canHold = false;
 				}
 			}
 		}

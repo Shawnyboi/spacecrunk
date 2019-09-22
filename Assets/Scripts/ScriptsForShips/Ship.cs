@@ -17,7 +17,6 @@ public class Ship : MonoBehaviour
         {
             m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], new ModuleSlot());
         }
-		Debug.Log(m_ColliderToModuleDictionary.Count);
     }
 
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
@@ -61,12 +60,15 @@ public class ModuleSlot
     
     public void AddModule(Module m)
     {
+		Debug.Log("Adding module " + m);
 		// TODO make this take time
-        m_Module = m;
+        m_Module = m; 
     }
 
     public Module RemoveModule()
     {
+		Debug.Log("removing module");
+
 		// TODO make this take time
 		Module m = m_Module;
         m_Module = null;

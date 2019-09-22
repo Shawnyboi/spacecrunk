@@ -13,6 +13,8 @@ public class Crunk : MonoBehaviour
 	public Module nearbyModule;
 	public Module heldModule;
 
+	public Transform moduleContainer;
+
 	private CrunkMover mover = null;
 	public CrunkMover Mover
 	{
@@ -38,40 +40,53 @@ public class Crunk : MonoBehaviour
 		}
 	}
 
-
-	/*public Module GetModule()
+	private void Start()
 	{
-		if (heldModule != null)
+		if (moduleContainer == null)
 		{
-			return heldModule;
+			moduleContainer = transform;
 		}
-		else if (nearbyModule != null)
-		{
-			return nearbyModule;
-		}
-		else if (nearbySlot?.Module != null)
-		{
-			return nearbySlot.Module;
-		}
-
-		return null;
-	}*/
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		var slot = FindModuleSlot(other);
-		if (slot != null)
+		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
+		if (moduleCollider != null)
 		{
-			nearbySlot = slot;
+			if (nearbyModule == null || 
+				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
+			{
+				nearbyModule = moduleCollider.targetModule;
+			}
+		}
+		else
+		{
+			var slot = FindModuleSlot(other);
+			if (slot != null)
+			{
+				nearbySlot = slot;
+			}
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		var slot = FindModuleSlot(other);
-		if (slot == nearbySlot)
+		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
+		if (moduleCollider != null)
 		{
-			nearbySlot = null;
+			if (nearbyModule == null ||
+				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
+			{
+				nearbyModule = moduleCollider.targetModule;
+			}
+		}
+		else
+		{
+			var slot = FindModuleSlot(other);
+			if (slot == nearbySlot)
+			{
+				nearbySlot = null;
+			}
 		}
 	}
 
@@ -89,10 +104,12 @@ public class Crunk : MonoBehaviour
 	public void PickupModule(Module module)
 	{
 		heldModule = module;
+		heldModule.transform.parent = moduleContainer;
 	}
 
 	public void DropModule()
 	{
+		heldModule.transform.parent = null; // TODO this should go somewhere or disconnect the joint
 		heldModule = null;
 	}
 }
