@@ -55,7 +55,7 @@ public class CrunkMover : MonoBehaviour
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
-        if(horizontal != 0 || vertical != 0)
+        if(horizontal != 0 || vertical != 0 && !Stationary)
         {
             if (moving == false)
             {

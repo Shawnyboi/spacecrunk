@@ -8,8 +8,13 @@ public class Ship : MonoBehaviour
 {
 
     private Dictionary<Collider, ModuleSlot> m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
+
+    public Dictionary<Collider, Transform> m_ColliderToAnchorDictionary = new Dictionary<Collider, Transform>();
+
     [SerializeField]
-    private List<Collider> m_ModuleCollider = new List<Collider>(4);
+    private List<Collider> m_ModuleColliders = new List<Collider>(3);
+    [SerializeField]
+    private List<Transform> m_ModuleAnchors = new List<Transform>(3);
     [SerializeField]
     private float m_OxygenDecayRate = 1f;
     private float m_OxygenPercent = 100f;
@@ -17,13 +22,17 @@ public class Ship : MonoBehaviour
     
     private void Start()
     {
+        for(int i = 0; i < 3; i++)
+        {
+            m_ColliderToAnchorDictionary.Add(m_ModuleColliders[i], m_ModuleAnchors[i]);
+        }
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Rigidbody.angularVelocity = new Vector3(0, Random.Range(-1f, 1f), 0);
         m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), 0, Random.Range(-.5f, .5f));
         m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
-        for (int i = 0; i < m_ModuleCollider.Count; i++)
+        for (int i = 0; i < m_ModuleColliders.Count; i++)
         {
-            m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], new ModuleSlot(this));
+            m_ColliderToModuleDictionary.Add(m_ModuleColliders[i], new ModuleSlot(this));
         }
     }
 
@@ -93,9 +102,10 @@ public class ModuleSlot
     {
         // TODO make this take time
         m_Module = m;
-        Collider c = m_Ship.GetColliderFromModuleSlot(this);
-        m_Module.transform.parent = c.transform;
-        m_Module.transform.LookAt(m_Module.transform.position + c.transform.forward);
+        Transform anchor = m_Ship.m_ColliderToAnchorDictionary[m_Ship.GetColliderFromModuleSlot(this)];
+        m_Module.transform.parent = anchor;
+        m_Module.transform.LookAt(m_Module.transform.position + anchor.forward);
+        m_Module.transform.position = anchor.position;
         m_Module.GetComponent<Rigidbody>().isKinematic = true;
         m_Module.AttachToShip(m_Ship);
     }

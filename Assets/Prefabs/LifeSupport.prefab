@@ -48,7 +48,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &3863174827760041992
 MonoBehaviour:
@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 4209180277793716493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 3180737641721442894}
   m_Father: {fileID: 7337536647255148899}
@@ -109,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3958251950842270200}
   - component: {fileID: 5859025945050962676}
+  - component: {fileID: 390280104011326359}
   m_Layer: 0
   m_Name: InteractTrigger
   m_TagString: Untagged
@@ -138,11 +139,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6516672297014237192}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.6916275, y: 1.7052608, z: 1.8474364}
   m_Center: {x: 0.023787975, y: 0.2794907, z: 0.1412394}
+--- !u!114 &390280104011326359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516672297014237192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455af9f833e084589bc1063696cccf8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetModule: {fileID: 3863174827760041992}
 --- !u!1001 &7592775156978456916
 PrefabInstance:
   m_ObjectHideFlags: 0
