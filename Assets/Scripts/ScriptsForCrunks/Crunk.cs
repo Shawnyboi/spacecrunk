@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CrunkMover), typeof(CrunkInteract))]
+[RequireComponent(typeof(CrunkMover), typeof(CrunkInteract), typeof(CrunkAnimation))]
 public class Crunk : MonoBehaviour
 {
 	//todo this should be private
@@ -17,6 +17,7 @@ public class Crunk : MonoBehaviour
 	public Transform moduleContainer;
 
 	private CrunkMover mover = null;
+    private CrunkAnimation crunkAnimation = null;
 	public CrunkMover Mover
 	{
 		get
@@ -43,6 +44,7 @@ public class Crunk : MonoBehaviour
 
 	private void Start()
 	{
+        crunkAnimation = GetComponent<CrunkAnimation>();
 		if (moduleContainer == null)
 		{
 			moduleContainer = transform;
@@ -119,8 +121,22 @@ public class Crunk : MonoBehaviour
 		return slot;
 	}
 
+    public void TriggerAirlockAnimation(bool leaving)
+    {
+        if(leaving)
+        {
+            crunkAnimation.GoIntoSpace();
+        }
+        else
+        {
+            crunkAnimation.GoIntoShip();
+        }
+        crunkAnimation.TriggerAirlockAnimation();
+    }
+
 	public void PickupModule(Module module)
 	{
+        crunkAnimation.StartGrabbing();
         Debug.Log("Picking Up module : " + module.name);
 		grabbedModule = module;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = true;
@@ -129,6 +145,7 @@ public class Crunk : MonoBehaviour
 
 	public void DropModule()
 	{
+        crunkAnimation.StopGrabbing();
         Debug.Log("Dropping module : " + grabbedModule.name);
 		grabbedModule.transform.parent = null;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = false;

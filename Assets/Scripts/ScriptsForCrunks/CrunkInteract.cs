@@ -13,10 +13,11 @@ public class CrunkInteract : MonoBehaviour
 	float holdThreshold = 1;
 
 	Crunk crunk = null;
-
+    CrunkAnimation crunkAnimation;
 	private void Start()
 	{
 		crunk = GetComponent<Crunk>();
+        crunkAnimation = GetComponent<CrunkAnimation>();
 	}
 
 	private void Update()

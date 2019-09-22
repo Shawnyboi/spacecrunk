@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody),typeof(CrunkAnimation))]
 public class CrunkMover : MonoBehaviour
 {
     public Crunk crunk;
+    CrunkAnimation crunkAnimation;
     Rigidbody body = null;
     Ship myShip;
     Vector3 lastFrameShipPosition;
@@ -22,6 +23,7 @@ public class CrunkMover : MonoBehaviour
 	[SerializeField]
 	float floatingDragFactor = 0.8f;
 	bool grounded = true;
+    bool moving = false;
 
     public void setGrounded(bool b) => grounded = b;
 
@@ -32,6 +34,7 @@ public class CrunkMover : MonoBehaviour
 	private void Start()
 	{
         crunk = GetComponent<Crunk>();
+        crunkAnimation = GetComponent<CrunkAnimation>();
         myShip = crunk.allyShip;
         if (myShip != null)
         {
@@ -50,6 +53,23 @@ public class CrunkMover : MonoBehaviour
 
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
+
+        if(horizontal != 0 || vertical != 0)
+        {
+            if (moving == false)
+            {
+                crunkAnimation.StartMoving();
+                moving = true;
+            }
+        }
+        else
+        {
+            if(moving == true)
+            {
+                crunkAnimation.StopMoving();
+                moving = false;
+            }
+        }
 
 		body.AddForce(externalForce);
 
