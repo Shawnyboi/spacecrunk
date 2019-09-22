@@ -99,6 +99,7 @@ public class Crunk : MonoBehaviour
 		else
 		{
 			var slot = FindModuleSlot(other);
+			Debug.Log("attempting to exit slot " + slot);
 			if (slot == nearbySlot)
 			{
 				nearbySlot = null;
@@ -128,7 +129,7 @@ public class Crunk : MonoBehaviour
 	public void DropModule()
 	{
         Debug.Log("Dropping module : " + grabbedModule.name);
-		grabbedModule.transform.SetSiblingIndex(0);
+		grabbedModule.transform.parent = null;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = false;
 		grabbedModule = null;
 	}
