@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
 
@@ -12,9 +13,13 @@ public class Ship : MonoBehaviour
     [SerializeField]
     private float m_OxygenDecayRate = 1f;
     private float m_OxygenPercent = 100f;
+    protected Rigidbody m_Rigidbody;
     
     private void Start()
     {
+        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rigidbody.angularVelocity = new Vector3(0, 0, Random.Range(-1f, 1f));
+        m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), 0f);
         m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
         for (int i = 0; i < m_ModuleCollider.Count; i++)
         {

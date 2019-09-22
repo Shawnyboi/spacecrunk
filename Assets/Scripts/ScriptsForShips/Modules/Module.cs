@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 abstract public class Module : MonoBehaviour
 {
 
@@ -22,6 +23,7 @@ abstract public class Module : MonoBehaviour
     protected Crunk m_CurrentCrunk = null;
     [SerializeField] //serializing for testing purposes
     protected Ship m_ParentShip;
+    protected Rigidbody m_Rigidbody;
 
 
     public void AttachToShip(Ship s) { m_ParentShip = s; }
@@ -82,6 +84,11 @@ abstract public class Module : MonoBehaviour
                 StartFiring();
             }
         }
+    }
+
+    void Awake()
+    {
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     protected void StartFiring()

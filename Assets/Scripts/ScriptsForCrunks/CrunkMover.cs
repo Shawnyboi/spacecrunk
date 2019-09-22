@@ -5,7 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CrunkMover : MonoBehaviour
 {
-	Rigidbody body = null;
+    Crunk crunk;
+    Rigidbody body = null;
+    Ship myShip;
+    Vector3 lastFrameShipPosition;
+    Vector3 currentFrameShipPosition;
 	[SerializeField]
 	Vector3 horizontalAxis = Vector3.right;
 	[SerializeField]
@@ -18,7 +22,6 @@ public class CrunkMover : MonoBehaviour
 	float groundedDragFactor = 0.6f;
 	[SerializeField]
 	float floatingDragFactor = 0.8f;
-
 	bool grounded = true;
 
     public void setGrounded(bool b) => grounded = b;
@@ -29,11 +32,29 @@ public class CrunkMover : MonoBehaviour
 
 	private void Start()
 	{
-		body = GetComponent<Rigidbody>();
+        crunk = GetComponent<Crunk>();
+        myShip = crunk.allyShip;
+        if (myShip != null)
+        {
+            lastFrameShipPosition = myShip.transform.position;
+        }
+        body = GetComponent<Rigidbody>();
+
 	}
 
 	private void FixedUpdate()
 	{
+        if(myShip != null)
+        {
+            currentFrameShipPosition = myShip.transform.position;
+        }
+        
+        var inShip = crunk.parentShip != null;
+        var shipTranslation = new Vector3(0, 0, 0);
+        if (inShip)
+        {
+            shipTranslation = currentFrameShipPosition - lastFrameShipPosition;
+        }
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
@@ -51,9 +72,14 @@ public class CrunkMover : MonoBehaviour
 
 			body.velocity *= grounded ? groundedDragFactor : floatingDragFactor;
 		}
-
+        body.position += shipTranslation;
 		externalForce = Vector3.zero;
-	}
+        if (myShip != null)
+        {
+            lastFrameShipPosition = myShip.transform.position;
+        }
+      
+    }
 
 	public void ApplyExternalForce(Vector3 force)
 	{
