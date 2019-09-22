@@ -25,7 +25,7 @@ public class Airlock : MonoBehaviour
     public void EnterShip(CrunkMover cm)
     {
         cm.crunk.TriggerAirlockAnimation(false);
-		cm.GetComponent<Rigidbody>().position = transform.position + (-m_PositionOffset * m_GoThroughAirlockVector.forward);
+		cm.GetComponent<Rigidbody>().position = transform.position;
 		cm.ApplyExternalForce(-m_AirlockForce * m_GoThroughAirlockVector.forward);
         cm.setGrounded(true);
         cm.crunk.parentShip = m_ShipImAttachedTo.GetComponent<Ship>();
