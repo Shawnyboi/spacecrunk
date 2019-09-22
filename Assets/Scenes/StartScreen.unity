@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1138,12 +1138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd81263f0754024080d72afff897779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ModuleCollider:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_ModuleColliders: []
+  m_ModuleAnchors: []
   m_OxygenDecayRate: 1
+  m_Team: 0
 --- !u!1 &579535445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2132,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 797013a557071ab43bdeca6c2742cc97, type: 2}
+  - {fileID: 2100000, guid: 470f765daf273d74f8c7c778aefc300f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2159,7 +2157,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -2172232286737176437, guid: 99030ab7b9bec22409aa0e193b82ad93, type: 3}
+  m_Mesh: {fileID: 3532461652467662968, guid: 157e4fb2583da8d4da9936e6ac96dc59, type: 3}
   m_Bones:
   - {fileID: 181049994}
   - {fileID: 326812872}
