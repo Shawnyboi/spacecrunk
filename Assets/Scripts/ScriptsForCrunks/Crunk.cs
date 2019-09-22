@@ -164,10 +164,12 @@ public class Crunk : MonoBehaviour
 		grabbedModule = module;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = true;
 		grabbedModule.transform.parent = moduleContainer;
+		grabbedModule.transform.localPosition = Vector3.zero;
 
 		if (grabbedModule.ModuleCollider != null)
 		{
 			grabbedModule.ModuleCollider.enabled = false;
+			grabbedModule.transform.LookAt(grabbedModule.transform.position + -transform.forward);
 		}
 	}
 
