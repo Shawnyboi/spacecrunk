@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -567,7 +567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870437043}
   m_LocalRotation: {x: 0.0018649006, y: -0.024396278, z: 0.0017479485, w: 0.9996991}
-  m_LocalPosition: {x: -19.3, y: 1, z: -6.5}
+  m_LocalPosition: {x: -15, y: 1, z: -6.5}
   m_LocalScale: {x: 1, y: 45.6, z: 37.023}
   m_Children: []
   m_Father: {fileID: 0}

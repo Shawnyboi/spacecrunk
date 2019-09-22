@@ -27,6 +27,10 @@ abstract public class Module : MonoBehaviour
     protected Rigidbody m_Rigidbody;
 	public Collider ModuleCollider = null;
 
+	public Animator attachAnimator = null;
+	public string attachFlag = "Attached";
+	public string transitionFlat = "Transitioning";
+
     public void AttachToShip(Ship s) { m_ParentShip = s; }
 
     public void RemoveFromShip() { m_ParentShip = null; }
