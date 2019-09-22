@@ -70,6 +70,13 @@ public class CrunkInteract : MonoBehaviour
                             {
                                 slottedModule.LockIn(crunk);
 								crunk.transform.LookAt(slottedModule.transform.position);
+
+								// Turn off hinter on module slot.
+								var hinter = slottedModule.GetComponentInParent<EventsForToggle>();
+								if (hinter != null)
+								{
+									hinter.TriggerNegative();
+								}
                             }
                         }
                     }

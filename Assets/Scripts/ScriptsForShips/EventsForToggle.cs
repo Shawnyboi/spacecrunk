@@ -5,8 +5,10 @@ using UnityEngine.Events;
 
 public class EventsForToggle : MonoBehaviour
 {
-	public UnityEvent onPositive = null;
-	public UnityEvent onNegative = null;
+	[SerializeField]
+	UnityEvent onPositive = null;
+	[SerializeField]
+	UnityEvent onNegative = null;
 
 	public void TriggerPositive()
 	{
