@@ -24,6 +24,25 @@ public class CrunkInteract : MonoBehaviour
 	{
 		if (Input.GetAxis("Interact") > Helper.Epsilon)
 		{
+			if (interactTime == 0)
+			{
+				if (crunk.nearbySlot != null)
+				{
+					var slotCollider = crunk.allyShip.GetColliderFromModuleSlot(crunk.nearbySlot);
+					if (slotCollider != null)
+					{
+						if (crunk.nearbySlot.Module == null)
+						{
+							slotCollider.GetComponent<ModuleSlotAnimation>().BeginAttaching();
+						}
+						else
+						{
+							slotCollider.GetComponent<ModuleSlotAnimation>().BeginDettaching();
+						}
+					}
+				}
+			}
+
 			interacting = !holdingDownButton;
 		}
 		else
@@ -86,10 +105,6 @@ public class CrunkInteract : MonoBehaviour
 					crunk.PickupModule(crunk.nearbyModule);
 				}
 			}
-			else
-			{
-
-			}
 
 			interacting = false;
 			holdingDownButton = false;
@@ -117,9 +132,16 @@ public class CrunkInteract : MonoBehaviour
 				}
 				else if (crunk.nearbySlot.Module != null)
 				{
+					var slotAnimation = crunk.nearbySlot.Module.GetComponentInParent<ModuleSlotAnimation>();
+					if (slotAnimation)
+					{
+						slotAnimation.FinishDettaching();
+					}
+
 					crunk.nearbySlot.RemoveModule();
 					holdingDownButton = false;
 					canHoldButton = false;
+
 				}
 			}
 		}
@@ -131,6 +153,12 @@ public class CrunkInteract : MonoBehaviour
         crunk.DropModule(false);
         crunk.nearbySlot.AddModule(m);
         holdingDownButton = false;
-        canHoldButton = false;
-    }
+		canHoldButton = false;
+
+		var slotAnimation = m.GetComponentInParent<ModuleSlotAnimation>();
+		if (slotAnimation)
+		{
+			slotAnimation.FinishAttaching();
+		}
+	}
 }

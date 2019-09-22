@@ -1320,5 +1320,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3847136077650841751, guid: 87a04875337234004b77bda86a99e336,
+        type: 3}
+      propertyPath: m_Name
+      value: ChargePillar1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325619833586174170, guid: 87a04875337234004b77bda86a99e336,
+        type: 3}
+      propertyPath: m_Name
+      value: ChargePillar1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87a04875337234004b77bda86a99e336, type: 3}

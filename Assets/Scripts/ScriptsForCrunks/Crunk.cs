@@ -65,7 +65,7 @@ public class Crunk : MonoBehaviour
 			if (nearbyModule == null ||
 				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
 			{
-                validInteraction = true;
+				validInteraction = true;
 				nearbyModule = moduleCollider.targetModule;
 			}
 		}
@@ -82,7 +82,12 @@ public class Crunk : MonoBehaviour
 			var slot = FindModuleSlot(other);
 			if (slot != null)
 			{
-                validInteraction = true;
+				if (nearbySlot != null && nearbySlot != slot)
+				{
+					allyShip.GetColliderFromModuleSlot(nearbySlot).GetComponent<EventsForToggle>().TriggerNegative();
+				}
+
+				validInteraction = true;
 				nearbySlot = slot;
 			}
 		}

@@ -27,10 +27,6 @@ abstract public class Module : MonoBehaviour
     protected Rigidbody m_Rigidbody;
 	public Collider ModuleCollider = null;
 
-	public Animator attachAnimator = null;
-	public string attachFlag = "Attached";
-	public string transitionFlat = "Transitioning";
-
     public void AttachToShip(Ship s) { m_ParentShip = s; }
 
     public void RemoveFromShip() { m_ParentShip = null; }
@@ -158,5 +154,5 @@ abstract public class Module : MonoBehaviour
                 transform.Rotate(transform.up, -m_TurnSpeed * Time.fixedDeltaTime);
             }
         }
-    }
+	}
 }
