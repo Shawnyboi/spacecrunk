@@ -9,7 +9,6 @@ public class CrunkMover : MonoBehaviour
     Rigidbody body = null;
     Ship myShip;
     Vector3 lastFrameShipPosition;
-    Vector3 currentFrameShipPosition;
 	[SerializeField]
 	Vector3 horizontalAxis = Vector3.right;
 	[SerializeField]
@@ -36,7 +35,7 @@ public class CrunkMover : MonoBehaviour
         myShip = crunk.allyShip;
         if (myShip != null)
         {
-            lastFrameShipPosition = myShip.transform.position;
+            lastFrameShipPosition = crunk.parentShip.transform.InverseTransformPoint(transform.position);
         }
         body = GetComponent<Rigidbody>();
 
@@ -44,17 +43,11 @@ public class CrunkMover : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-        if(myShip != null)
-        {
-            currentFrameShipPosition = myShip.transform.position;
-        }
-        
-        var inShip = crunk.parentShip != null;
-        var shipTranslation = new Vector3(0, 0, 0);
-        if (inShip)
-        {
-            shipTranslation = currentFrameShipPosition - lastFrameShipPosition;
-        }
+		if (grounded && crunk.parentShip != null)
+		{
+			body.position = crunk.parentShip.transform.TransformPoint(lastFrameShipPosition) + body.velocity * Time.deltaTime;
+		}
+
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
@@ -73,15 +66,10 @@ public class CrunkMover : MonoBehaviour
 			body.velocity *= grounded ? groundedDragFactor : floatingDragFactor;
 		}
 
-		if (grounded)
-		{
-			body.position += shipTranslation;
-		}
-
 		externalForce = Vector3.zero;
         if (myShip != null)
         {
-            lastFrameShipPosition = myShip.transform.position;
+            lastFrameShipPosition = myShip.transform.InverseTransformPoint(body.position);
         }
       
     }
