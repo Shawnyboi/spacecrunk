@@ -17,7 +17,8 @@ public class Gun : Module
     {
         if (timePassedSinceLastShot > rechargeTime)
         {
-            GameObject projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation);
+            Projectile projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation).GetComponent<Projectile>();
+            projectile.m_Team = m_ParentShip.GetTeam();
             timePassedSinceLastShot = 0f;
         }
         else

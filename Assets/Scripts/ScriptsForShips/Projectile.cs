@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 {
     protected Rigidbody m_Rigidbody;
     protected SphereCollider m_Collider;
+    public int m_Team;
 
     [SerializeField]
     protected float m_Speed = 10f;

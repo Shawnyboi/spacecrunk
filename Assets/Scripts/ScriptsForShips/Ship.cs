@@ -21,6 +21,7 @@ public class Ship : MonoBehaviour
     protected Rigidbody m_Rigidbody;
     [SerializeField]
     private int m_Team;
+
     private void Start()
     {
         for(int i = 0; i < 3; i++)
@@ -73,6 +74,12 @@ public class Ship : MonoBehaviour
         return moduleToRemove.RemoveModule();
     }
 
+    public void KnockOffModuleAtCollider(Collider c)
+    {
+        var module = RemoveModuleAtCollider(c);
+        module.transform.parent = null;
+    }
+
     private void Update()
     {
         if (m_OxygenPercent > 0)
@@ -84,6 +91,32 @@ public class Ship : MonoBehaviour
     public void AddOxygen(float amt)
     {
         m_OxygenPercent = Mathf.Min(m_OxygenPercent + amt, 100f);
+    }
+
+    public void KnockOffRandomModule()
+    {
+        // when you get hit
+        var list = GetCollidersWithModulesInThem();
+        if (list.Count > 0)
+        {
+            var index = Random.Range(0, list.Count - 1);
+            RemoveModuleAtCollider(m_ColliderToModuleDictionary.Keys.ElementAt(index));
+        }else
+        {
+            //do nothing
+        }
+    }
+    private List<Collider> GetCollidersWithModulesInThem()
+    {
+        List<Collider> list = new List<Collider>();
+        foreach(Collider c in m_ColliderToModuleDictionary.Keys)
+        {
+            if (m_ColliderToModuleDictionary[c] != null) {
+                list.Add(c);
+            }
+        }
+        return list;
+        
     }
 
 }
