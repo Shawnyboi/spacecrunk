@@ -10,6 +10,7 @@ public class Crunk : MonoBehaviour
 	public Ship enemyShip = null;
 	public Ship parentShip = null;
 	public ModuleSlot nearbySlot;
+	public ModuleSlot lockedSlot;
 	public Module nearbyModule;
 	public Module grabbedModule;
 	public Airlock nearbyAirlock;
@@ -19,6 +20,8 @@ public class Crunk : MonoBehaviour
 	private CrunkMover mover = null;
     private CrunkAnimation crunkAnimation = null;
     private int team;
+
+	public int playerNumber = 1;
 
     public int GetTeam() { return team; }
 	public CrunkMover Mover
@@ -65,7 +68,7 @@ public class Crunk : MonoBehaviour
 			if (nearbyModule == null ||
 				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
 			{
-                validInteraction = true;
+				validInteraction = true;
 				nearbyModule = moduleCollider.targetModule;
 			}
 		}
@@ -82,7 +85,12 @@ public class Crunk : MonoBehaviour
 			var slot = FindModuleSlot(other);
 			if (slot != null)
 			{
-                validInteraction = true;
+				if (nearbySlot != null && nearbySlot != slot)
+				{
+					allyShip.GetColliderFromModuleSlot(nearbySlot).GetComponent<EventsForToggle>().TriggerNegative();
+				}
+
+				validInteraction = true;
 				nearbySlot = slot;
 			}
 		}
@@ -157,10 +165,12 @@ public class Crunk : MonoBehaviour
 		grabbedModule = module;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = true;
 		grabbedModule.transform.parent = moduleContainer;
+		grabbedModule.transform.localPosition = Vector3.zero;
 
 		if (grabbedModule.ModuleCollider != null)
 		{
 			grabbedModule.ModuleCollider.enabled = false;
+			grabbedModule.transform.LookAt(grabbedModule.transform.position + -transform.forward);
 		}
 	}
 

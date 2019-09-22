@@ -14,9 +14,9 @@ public class CrunkPump : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetAxis("Charge") > Helper.Epsilon)
+		if (Input.GetAxis($"Charge{crunk.playerNumber}") > Helper.Epsilon)
 		{
-			if (!alreadyPumped && crunk.Mover.Stationary && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
+			if (!alreadyPumped && crunk.lockedSlot != null && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
 			{
 				bool pumping = crunk.nearbySlot.Module.PumpUp();
 			}
@@ -25,5 +25,20 @@ public class CrunkPump : MonoBehaviour
 		{
 			alreadyPumped = false;
 		}
+        var horizontalInput = Input.GetAxis($"Horizontal{crunk.playerNumber}");
+        if (horizontalInput > Helper.Epsilon || horizontalInput < -Helper.Epsilon)
+        {
+            if(crunk.Mover.Stationary && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
+            {
+                if(horizontalInput > 0)
+                {
+                    crunk.nearbySlot.Module.Turn(true);
+                }
+                else
+                {
+                    crunk.nearbySlot.Module.Turn(false);
+                }
+            }
+        }
 	}
 }
