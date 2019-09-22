@@ -119,6 +119,11 @@ public class Ship : MonoBehaviour
         
     }
 
+    public void Kill()
+    {
+        Destroy(this.gameObject); //💀💀💀💀💀💀💀💀
+    }
+
 }
 
 
@@ -161,4 +166,5 @@ public class ModuleSlot
     {
         return m_Module != null;
     }
+    
 }
