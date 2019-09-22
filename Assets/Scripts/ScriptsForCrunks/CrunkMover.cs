@@ -55,6 +55,14 @@ public class CrunkMover : MonoBehaviour
 
 		var internalForce = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
 
+		Vector3 lookAt = transform.position + transform.forward;
+		if (internalForce.sqrMagnitude > 0)
+		{
+			lookAt = transform.position + internalForce;
+		}
+
+		transform.LookAt(lookAt);
+
 		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && !Stationary)
 		{
 			body.AddForce(internalForce);
