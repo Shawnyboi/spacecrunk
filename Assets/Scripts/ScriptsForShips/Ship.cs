@@ -18,13 +18,18 @@ public class Ship : MonoBehaviour
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        m_Rigidbody.angularVelocity = new Vector3(0, 0, Random.Range(-1f, 1f));
-        m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), 0f);
+        m_Rigidbody.angularVelocity = new Vector3(0, Random.Range(-1f, 1f), 0);
+        m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), 0, Random.Range(-.5f, .5f));
         m_ColliderToModuleDictionary = new Dictionary<Collider, ModuleSlot>();
         for (int i = 0; i < m_ModuleCollider.Count; i++)
         {
             m_ColliderToModuleDictionary.Add(m_ModuleCollider[i], new ModuleSlot(this));
         }
+    }
+
+    public Collider GetColliderFromModuleSlot(ModuleSlot ms)
+    {
+        return m_ColliderToModuleDictionary.FirstOrDefault(x => x.Value == ms).Key;
     }
 
     public ModuleSlot GetModuleSlotAtCollider(Collider c)
@@ -88,6 +93,10 @@ public class ModuleSlot
     {
         // TODO make this take time
         m_Module = m;
+        Collider c = m_Ship.GetColliderFromModuleSlot(this);
+        m_Module.transform.parent = c.transform;
+        m_Module.transform.LookAt(m_Module.transform.position + c.transform.forward);
+        m_Module.GetComponent<Rigidbody>().isKinematic = true;
         m_Module.AttachToShip(m_Ship);
     }
 

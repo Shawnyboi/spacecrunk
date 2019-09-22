@@ -11,7 +11,7 @@ public class Crunk : MonoBehaviour
 	public Ship parentShip = null;
 	public ModuleSlot nearbySlot;
 	public Module nearbyModule;
-	public Module heldModule;
+	public Module grabbedModule;
 	public Airlock nearbyAirlock;
 
 	public Transform moduleContainer;
@@ -51,12 +51,14 @@ public class Crunk : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+        Debug.Log("Entered collider of " + other.name);
 		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
 		var airlock = other.GetComponent<Airlock>();
 
 		if (moduleCollider != null)
 		{
-			if (nearbyModule == null || 
+            Debug.Log("Entered collider was a module");
+			if (nearbyModule == null ||
 				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
 			{
 				nearbyModule = moduleCollider.targetModule;
@@ -64,7 +66,7 @@ public class Crunk : MonoBehaviour
 		}
 		else if (airlock != null)
 		{
-			Debug.Log("found airlock");
+			Debug.Log("Entered collider was the module");
 			nearbyAirlock = airlock;
 		}
 		else
@@ -90,7 +92,7 @@ public class Crunk : MonoBehaviour
 				nearbyModule = moduleCollider.targetModule;
 			}
 		}
-		else if (airlock != nearbyAirlock)
+		else if (airlock == nearbyAirlock)
 		{
 			nearbyAirlock = null;
 		}
@@ -117,13 +119,17 @@ public class Crunk : MonoBehaviour
 
 	public void PickupModule(Module module)
 	{
-		heldModule = module;
-		heldModule.transform.parent = moduleContainer;
+        Debug.Log("Picking Up module : " + module.name);
+		grabbedModule = module;
+        grabbedModule.GetComponent<Rigidbody>().isKinematic = true;
+		grabbedModule.transform.parent = moduleContainer;
 	}
 
 	public void DropModule()
 	{
-		heldModule.transform.parent = null; // TODO this should go somewhere or disconnect the joint
-		heldModule = null;
+        Debug.Log("Dropping module : " + grabbedModule.name);
+		grabbedModule.transform.SetSiblingIndex(0);
+        grabbedModule.GetComponent<Rigidbody>().isKinematic = false;
+		grabbedModule = null;
 	}
 }

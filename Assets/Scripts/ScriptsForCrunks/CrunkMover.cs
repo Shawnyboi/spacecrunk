@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CrunkMover : MonoBehaviour
 {
-    Crunk crunk;
+    public Crunk crunk;
     Rigidbody body = null;
     Ship myShip;
     Vector3 lastFrameShipPosition;
@@ -54,6 +54,14 @@ public class CrunkMover : MonoBehaviour
 		body.AddForce(externalForce);
 
 		var internalForce = (((horizontalAxis * horizontal) + (verticalAxis * vertical))).normalized * acceleration;
+
+		Vector3 lookAt = transform.position + transform.forward;
+		if (internalForce.sqrMagnitude > 0)
+		{
+			lookAt = transform.position + internalForce;
+		}
+
+		transform.LookAt(lookAt);
 
 		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && !Stationary)
 		{
