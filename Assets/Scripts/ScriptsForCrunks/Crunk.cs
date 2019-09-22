@@ -59,46 +59,57 @@ public class Crunk : MonoBehaviour
 	{
 		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
 		var airlock = other.GetComponent<Airlock>();
-
+        bool validInteraction = false;
 		if (moduleCollider != null)
 		{
 			if (nearbyModule == null ||
 				(moduleCollider.targetModule.transform.position - transform.position).sqrMagnitude < (nearbyModule.transform.position - transform.position).sqrMagnitude)
 			{
+                validInteraction = true;
 				nearbyModule = moduleCollider.targetModule;
 			}
 		}
 		else if (airlock != null)
 		{
-			nearbyAirlock = airlock;
+            if(airlock.GetTeam() == GetTeam())
+            {
+                validInteraction = true;
+                nearbyAirlock = airlock;
+            }            
 		}
 		else
 		{
 			var slot = FindModuleSlot(other);
 			if (slot != null)
 			{
+                validInteraction = true;
 				nearbySlot = slot;
 			}
 		}
 
-		var events = other.GetComponent<EventsForToggle>();
-		if (events != null)
-		{
-			events.TriggerPositive();
-		}
+        if (validInteraction)
+        {
+            var events = other.GetComponent<EventsForToggle>();
+            if (events != null)
+            {
+                events.TriggerPositive();
+            }
+        }
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
 		var airlock = other.GetComponent<Airlock>();
-
+        var validInteraction = false;
 		if (moduleCollider != null)
 		{
+            validInteraction = true;
 			nearbyModule = null;
 		}
 		else if (airlock != null && airlock == nearbyAirlock)
 		{
+            validInteraction = true;
 			nearbyAirlock = null;
 		}
 		else
@@ -106,24 +117,23 @@ public class Crunk : MonoBehaviour
 			var slot = FindModuleSlot(other);
 			if (slot == nearbySlot)
 			{
+                validInteraction = true;
 				nearbySlot = null;
 			}
 		}
-
-		var events = other.GetComponent<EventsForToggle>();
-		if (events != null)
-		{
-			events.TriggerNegative();
-		}
+        if (validInteraction)
+        {
+            var events = other.GetComponent<EventsForToggle>();
+            if (events != null)
+            {
+                events.TriggerNegative();
+            }
+        }
 	}
 
 	private ModuleSlot FindModuleSlot(Collider other)
 	{
 		var slot = allyShip?.GetModuleSlotAtCollider(other);
-		if (slot == null)
-		{
-			slot = enemyShip?.GetModuleSlotAtCollider(other);
-		}
 
 		return slot;
 	}
