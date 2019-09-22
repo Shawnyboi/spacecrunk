@@ -719,16 +719,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3974376413968062914, guid: c9465bb5d43f8cd42bec7182671167cf,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3974376413968062914, guid: c9465bb5d43f8cd42bec7182671167cf,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 59739561282790655, guid: c9465bb5d43f8cd42bec7182671167cf,
         type: 3}
       propertyPath: m_Constraints
@@ -1319,16 +1309,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847136077650841751, guid: 87a04875337234004b77bda86a99e336,
-        type: 3}
-      propertyPath: m_Name
-      value: ChargePillar1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325619833586174170, guid: 87a04875337234004b77bda86a99e336,
-        type: 3}
-      propertyPath: m_Name
-      value: ChargePillar1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87a04875337234004b77bda86a99e336, type: 3}

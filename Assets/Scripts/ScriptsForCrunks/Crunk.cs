@@ -20,6 +20,8 @@ public class Crunk : MonoBehaviour
     private CrunkAnimation crunkAnimation = null;
     private int team;
 
+	public int playerNumber = 1;
+
     public int GetTeam() { return team; }
 	public CrunkMover Mover
 	{

@@ -52,8 +52,8 @@ public class CrunkMover : MonoBehaviour
 			body.position = crunk.parentShip.transform.TransformPoint(lastFrameShipPosition) + body.velocity * Time.deltaTime;
 		}
 
-		var horizontal = Input.GetAxis("Horizontal");
-		var vertical = Input.GetAxis("Vertical");
+		var horizontal = Input.GetAxis($"Horizontal{crunk.playerNumber}");
+		var vertical = Input.GetAxis($"Vertical{crunk.playerNumber}");
 
         if((horizontal != 0 || vertical != 0) && !Stationary)
         {

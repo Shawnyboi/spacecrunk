@@ -14,7 +14,7 @@ public class CrunkPump : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetAxis("Charge") > Helper.Epsilon)
+		if (Input.GetAxis($"Charge{crunk.playerNumber}") > Helper.Epsilon)
 		{
 			if (!alreadyPumped && crunk.Mover.Stationary && crunk.nearbySlot?.Module?.CurrentCrunk == crunk)
 			{

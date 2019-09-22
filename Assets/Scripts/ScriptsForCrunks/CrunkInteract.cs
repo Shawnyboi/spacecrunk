@@ -22,7 +22,7 @@ public class CrunkInteract : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetAxis("Interact") > Helper.Epsilon)
+		if (Input.GetAxis($"Interact{crunk.playerNumber}") > Helper.Epsilon)
 		{
 			if (interactTime == 0)
 			{
