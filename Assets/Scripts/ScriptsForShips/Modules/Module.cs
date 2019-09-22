@@ -97,8 +97,8 @@ abstract public class Module : MonoBehaviour
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        m_Rigidbody.angularVelocity = new Vector3(0, 0, Random.Range(-1f, 1f));
-        m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), 0f);
+        m_Rigidbody.angularVelocity = new Vector3(0,Random.Range(-1f, 1f), 0);
+        m_Rigidbody.velocity = new Vector3(Random.Range(-.5f, .5f), 0f, Random.Range(-.5f, .5f));
     }
 
 
