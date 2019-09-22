@@ -16,6 +16,7 @@ public class Airlock : MonoBehaviour
         cm.ApplyExternalForce(m_AirlockForce * m_GoThroughAirlockVector.forward);
         cm.setGrounded(false);
         cm.transform.parent.SetSiblingIndex(0);
+		Debug.Log("LeaveShip");
     }
 
     public void EnterShip(CrunkMover cm)
@@ -23,5 +24,7 @@ public class Airlock : MonoBehaviour
         cm.ApplyExternalForce(-m_AirlockForce * m_GoThroughAirlockVector.forward);
         cm.setGrounded(true);
         cm.transform.parent = m_ShipImAttachedTo.transform;
-    }
+		Debug.Log("EnterShip");
+
+	}
 }

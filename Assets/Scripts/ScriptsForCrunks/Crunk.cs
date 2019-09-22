@@ -12,6 +12,7 @@ public class Crunk : MonoBehaviour
 	public ModuleSlot nearbySlot;
 	public Module nearbyModule;
 	public Module heldModule;
+	public Airlock nearbyAirlock;
 
 	public Transform moduleContainer;
 
@@ -51,6 +52,8 @@ public class Crunk : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
+		var airlock = other.GetComponent<Airlock>();
+
 		if (moduleCollider != null)
 		{
 			if (nearbyModule == null || 
@@ -58,6 +61,11 @@ public class Crunk : MonoBehaviour
 			{
 				nearbyModule = moduleCollider.targetModule;
 			}
+		}
+		else if (airlock != null)
+		{
+			Debug.Log("found airlock");
+			nearbyAirlock = airlock;
 		}
 		else
 		{
@@ -72,6 +80,8 @@ public class Crunk : MonoBehaviour
 	private void OnTriggerExit(Collider other)
 	{
 		var moduleCollider = other.GetComponent<ModuleInteractCollider>();
+		var airlock = other.GetComponent<Airlock>();
+
 		if (moduleCollider != null)
 		{
 			if (nearbyModule == null ||
@@ -79,6 +89,10 @@ public class Crunk : MonoBehaviour
 			{
 				nearbyModule = moduleCollider.targetModule;
 			}
+		}
+		else if (airlock != nearbyAirlock)
+		{
+			nearbyAirlock = null;
 		}
 		else
 		{

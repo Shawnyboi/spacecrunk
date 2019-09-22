@@ -31,14 +31,29 @@ public class CrunkInteract : MonoBehaviour
 			canHold = true;
 			if (interacting)
 			{
-				if (crunk.heldModule != null)
+				if (crunk.nearbyAirlock != null)
+				{
+					if (crunk.heldModule != null)
+					{
+						crunk.DropModule();
+					}
+
+					if (crunk.parentShip == null)
+					{
+						crunk.nearbyAirlock.EnterShip(crunk.Mover);
+					}
+					else
+					{
+						crunk.nearbyAirlock.LeaveShip(crunk.Mover);
+					}
+				}
+				else if (crunk.heldModule != null)
 				{
 					crunk.DropModule();
 				}
 				else if (crunk.nearbySlot != null)
 				{
 					var slottedModule = crunk.nearbySlot.Module;
-					Debug.Log("slotted module " + slottedModule);
 					if (slottedModule != null)
 					{
 						if (slottedModule.IsLockedIn())
@@ -47,7 +62,6 @@ public class CrunkInteract : MonoBehaviour
 						}
 						else
 						{
-							Debug.Log("Locking in");
 							slottedModule.LockIn(crunk);
 						}
 					}
