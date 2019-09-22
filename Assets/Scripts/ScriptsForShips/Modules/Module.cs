@@ -25,7 +25,7 @@ abstract public class Module : MonoBehaviour
     [SerializeField] //serializing for testing purposes
     protected Ship m_ParentShip;
     protected Rigidbody m_Rigidbody;
-
+	public Collider ModuleCollider = null;
 
     public void AttachToShip(Ship s) { m_ParentShip = s; }
 

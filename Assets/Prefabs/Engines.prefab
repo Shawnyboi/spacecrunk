@@ -142,6 +142,7 @@ MonoBehaviour:
   m_ChargeTime: 0.5
   m_ChargeDownTime: 1
   m_ParentShip: {fileID: 0}
+  ModuleCollider: {fileID: 7075983315468205066}
   m_ForcePoint: {fileID: 9089295686471809527}
   m_EngineForceMagnitude: 50000
 --- !u!1 &8649745930414701952
