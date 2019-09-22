@@ -15,11 +15,14 @@ public class ShipDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Projectile p = other?.GetComponent<Projectile>();
-        if (p.m_Team == m_Ship.GetTeam())
+        if (p != null)
         {
-            if (!currentlyImmuneToDamage)
+            if (p.m_Team == m_Ship.GetTeam())
             {
-                TakeDamage();
+                if (!currentlyImmuneToDamage)
+                {
+                    TakeDamage();
+                }
             }
         }
     }
