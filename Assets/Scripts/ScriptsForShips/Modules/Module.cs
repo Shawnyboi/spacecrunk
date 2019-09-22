@@ -90,7 +90,7 @@ abstract public class Module : MonoBehaviour
         StartCoroutine(FireRoutine());
     }
 
-    protected void StopFiring()
+    virtual protected void StopFiring()
     {
         m_Charge = 0f;
         m_Firing = false;
