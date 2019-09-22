@@ -80,6 +80,7 @@ MonoBehaviour:
   m_ChargeTime: 0.5
   m_ChargeDownTime: 10
   m_ParentShip: {fileID: 0}
+  ModuleCollider: {fileID: 7671110254970879359}
   m_OxygenRestoreRate: 6
 --- !u!1 &4209180277793716493
 GameObject:

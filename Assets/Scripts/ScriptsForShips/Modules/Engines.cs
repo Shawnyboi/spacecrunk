@@ -23,7 +23,7 @@ public class Engines : Module
     protected void MoveShip()
     {
         Rigidbody parentRB = m_ParentShip.GetComponent<Rigidbody>();
-        parentRB.AddForceAtPosition(m_ForcePoint.forward * m_EngineForceMagnitude, m_ForcePoint.position);
+        parentRB.AddForceAtPosition(-m_ForcePoint.forward * m_EngineForceMagnitude, m_ForcePoint.position);
     }
     /*uncomment for testing*/
     /*

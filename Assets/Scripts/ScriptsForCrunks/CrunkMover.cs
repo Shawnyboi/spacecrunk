@@ -55,7 +55,7 @@ public class CrunkMover : MonoBehaviour
 		var horizontal = Input.GetAxis("Horizontal");
 		var vertical = Input.GetAxis("Vertical");
 
-        if(horizontal != 0 || vertical != 0 && !Stationary)
+        if((horizontal != 0 || vertical != 0) && !Stationary)
         {
             if (moving == false)
             {
@@ -82,7 +82,10 @@ public class CrunkMover : MonoBehaviour
 			lookAt = transform.position + internalForce;
 		}
 
-		transform.LookAt(lookAt);
+		if (!Stationary)
+		{
+			transform.LookAt(lookAt);
+		}
 
 		if (body.velocity.sqrMagnitude < (maxSpeed * maxSpeed) && !Stationary)
 		{

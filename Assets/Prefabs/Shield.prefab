@@ -126,8 +126,10 @@ MonoBehaviour:
   m_ChargeTime: 0.5
   m_ChargeDownTime: 5
   m_ParentShip: {fileID: 0}
+  ModuleCollider: {fileID: 3719228012789128808}
   m_ForceFieldPrefab: {fileID: 242477934750859677, guid: 19a536e6f53143e44afa92461a9fa2f7,
     type: 3}
+  m_CurrentForceField: {fileID: 0}
   m_ShieldPoint: {fileID: 7369397584525442782}
 --- !u!65 &3719228012789128808
 BoxCollider:

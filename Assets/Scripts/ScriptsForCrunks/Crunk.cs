@@ -157,13 +157,26 @@ public class Crunk : MonoBehaviour
 		grabbedModule = module;
         grabbedModule.GetComponent<Rigidbody>().isKinematic = true;
 		grabbedModule.transform.parent = moduleContainer;
+
+		if (grabbedModule.ModuleCollider != null)
+		{
+			grabbedModule.ModuleCollider.enabled = false;
+		}
 	}
 
-	public void DropModule()
+	public void DropModule(bool isFree)
 	{
-        crunkAnimation.StopGrabbing();
+		if (isFree)
+		{
+			if (grabbedModule.ModuleCollider != null)
+			{
+				grabbedModule.ModuleCollider.enabled = true;
+			}
+			grabbedModule.GetComponent<Rigidbody>().isKinematic = false;
+		}
+
+		crunkAnimation.StopGrabbing();
 		grabbedModule.transform.parent = null;
-        grabbedModule.GetComponent<Rigidbody>().isKinematic = false;
 		grabbedModule = null;
 	}
 }

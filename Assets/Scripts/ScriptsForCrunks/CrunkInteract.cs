@@ -38,7 +38,7 @@ public class CrunkInteract : MonoBehaviour
                     {
                         if (crunk.grabbedModule != null)
                         {
-                            crunk.DropModule();
+                            crunk.DropModule(true);
                         }
 
                         if (crunk.parentShip == null)
@@ -53,7 +53,7 @@ public class CrunkInteract : MonoBehaviour
 				}
 				else if (crunk.grabbedModule != null)
 				{
-					crunk.DropModule();
+					crunk.DropModule(true);
 				}
 				else if (crunk.nearbySlot != null)
 				{
@@ -69,6 +69,14 @@ public class CrunkInteract : MonoBehaviour
                             else
                             {
                                 slottedModule.LockIn(crunk);
+								crunk.transform.LookAt(slottedModule.transform.position);
+
+								// Turn off hinter on module slot.
+								var hinter = slottedModule.GetComponentInParent<EventsForToggle>();
+								if (hinter != null)
+								{
+									hinter.TriggerNegative();
+								}
                             }
                         }
                     }
@@ -120,7 +128,7 @@ public class CrunkInteract : MonoBehaviour
     private void AttachModuleToShipFromHand()
     {
         Module m = crunk.grabbedModule;
-        crunk.DropModule();
+        crunk.DropModule(false);
         crunk.nearbySlot.AddModule(m);
         holdingDownButton = false;
         canHoldButton = false;
