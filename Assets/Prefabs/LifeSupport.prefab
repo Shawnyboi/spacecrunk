@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TurnSpeed: 0
   m_MaxArc: 0
-  m_ChargeTime: 3
+  m_ChargeTime: 0.5
   m_ChargeDownTime: 10
   m_ParentShip: {fileID: 0}
   m_OxygenRestoreRate: 6
