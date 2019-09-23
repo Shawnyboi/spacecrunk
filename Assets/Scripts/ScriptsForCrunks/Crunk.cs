@@ -20,11 +20,39 @@ public class Crunk : MonoBehaviour
 	private CrunkMover mover = null;
     private CrunkAnimation crunkAnimation = null;
     private int team;
+    private bool alive = true;
 
 	public int playerNumber = 1;
 
     public int GetTeam() { return team; }
-	public CrunkMover Mover
+
+    private IEnumerator CheckOxygenPeriodically()
+    {
+        while (alive) {
+            yield return new WaitForSeconds(2f);
+            if (OutOfOxygen()){
+                alive = false;
+            }
+        }
+    }
+
+    public bool isAlive()
+    {
+        return alive;
+    }
+
+    private bool OutOfOxygen()
+    {
+        if (allyShip != null)
+        {
+            return allyShip.NoMoreOxygen();
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public CrunkMover Mover
 	{
 		get
 		{
@@ -56,6 +84,7 @@ public class Crunk : MonoBehaviour
 		{
 			moduleContainer = transform;
 		}
+        StartCoroutine(CheckOxygenPeriodically());
 	}
 
 	private void OnTriggerEnter(Collider other)

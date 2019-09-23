@@ -132,6 +132,13 @@ public class Ship : MonoBehaviour
         Destroy(this.gameObject); //💀💀💀💀💀💀💀💀
     }
 
+
+    public bool NoMoreOxygen()
+    {
+        return m_OxygenPercent <= 0;
+    }
+
+
 }
 
 
@@ -177,5 +184,5 @@ public class ModuleSlot
     {
         return m_Module != null;
     }
-    
+
 }
