@@ -148,9 +148,9 @@ public class CrunkInteract : MonoBehaviour
 			{
 				if (crunk.grabbedModule != null)
 				{
-                    AttachModuleToShipFromHand();
+					AttachModuleToShipFromHand();
 				}
-				else if (crunk.nearbySlot.Module != null)
+				else if (crunk.nearbySlot.Module != null && crunk.parentShip == null)
 				{
 					var slotAnimation = crunk.nearbySlot.Module.GetComponentInParent<ModuleSlotAnimation>();
 					if (slotAnimation)
