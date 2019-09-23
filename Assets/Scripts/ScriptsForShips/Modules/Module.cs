@@ -31,6 +31,8 @@ abstract public class Module : MonoBehaviour
     protected Rigidbody m_Rigidbody;
 	public Collider ModuleCollider = null;
 
+	public ModuleCharge Charger = null;
+
     public void AttachToShip(Ship s) { m_ParentShip = s; }
 
     public void RemoveFromShip() { m_ParentShip = null; }
@@ -70,6 +72,7 @@ abstract public class Module : MonoBehaviour
         if (!m_Firing && m_LockedIn)
         {
             m_Charge += m_MaxCharge / m_ChargeTime * Time.deltaTime;
+			Charger.ShowCharge(m_Charge);
 			return true;
         }
 		return false;
@@ -80,8 +83,9 @@ abstract public class Module : MonoBehaviour
         if (m_Firing)
         {
             m_Charge -=  m_MaxCharge / m_ChargeDownTime * Time.deltaTime;
-        }
-    }
+			Charger.ShowCharge(m_Charge);
+		}
+	}
 
      void Update()
     {
