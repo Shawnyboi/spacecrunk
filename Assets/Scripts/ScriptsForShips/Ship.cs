@@ -99,7 +99,12 @@ public class Ship : MonoBehaviour
             m_OxygenPercent = Mathf.Max(m_OxygenPercent - m_OxygenDecayRate * Time.deltaTime, 0);
         }
         OxygenSlider.fillAmount = m_OxygenPercent / 100f;
-    }
+
+		if (Mathf.Abs(m_Rigidbody.angularVelocity.y) < 0.1f)
+		{
+			m_Rigidbody.angularVelocity = new Vector3(0, 0.1f, 0);
+		}
+	}
 
     public void AddOxygen(float amt)
     {
