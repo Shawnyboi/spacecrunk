@@ -9,6 +9,7 @@ public class LifeSupport : Module
     protected override void Fire()
     {
         //Fill up the oxygen in the ship or on the players or however
+        //PlayFireSound();
         AddOxygenToShip();
         
     }

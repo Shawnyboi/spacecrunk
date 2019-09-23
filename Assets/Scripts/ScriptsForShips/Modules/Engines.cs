@@ -13,6 +13,7 @@ public class Engines : Module
     override protected void Fire()
     {
         //Allow for ship movement for a time     
+        //PlayFireSound();
         MoveShip();
     }
 
@@ -27,6 +28,7 @@ public class Engines : Module
         StartCoroutine(FireThrusters());
         Rigidbody parentRB = m_ParentShip.GetComponent<Rigidbody>();
         parentRB.AddForceAtPosition(-m_ForcePoint.forward * m_EngineForceMagnitude, m_ForcePoint.position);
+        
     }
 
     private IEnumerator FireThrusters()

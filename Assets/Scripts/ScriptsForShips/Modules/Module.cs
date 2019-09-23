@@ -18,6 +18,10 @@ abstract public class Module : MonoBehaviour
     protected float m_ChargeTime;
     [SerializeField]
     protected float m_ChargeDownTime;
+    [SerializeField]
+    protected AudioSource m_AudioSource;
+    [SerializeField]
+    protected AudioClip m_FireClip;
     protected Rigidbody m_ModuleRB;
     protected Collider m_ModuleCollider;
     protected Crunk m_CurrentCrunk = null;
@@ -95,6 +99,12 @@ abstract public class Module : MonoBehaviour
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_AudioSource.playOnAwake = false;
+        m_AudioSource.loop = false;
+        if (m_FireClip != null)
+        {
+            m_AudioSource.clip = m_FireClip;
+        }
     }
 
     private void Start()
@@ -108,6 +118,7 @@ abstract public class Module : MonoBehaviour
     protected void StartFiring()
     {
         m_Firing = true;
+        PlayFireSound();
         StartCoroutine(FireRoutine());
     }
 
@@ -128,7 +139,10 @@ abstract public class Module : MonoBehaviour
         StopFiring();
         yield return null;
     }
-
+    protected void PlayFireSound()
+    {
+        m_AudioSource.Play();
+    }
     abstract protected void Fire();
     abstract public void Turn(bool clockwise);
 

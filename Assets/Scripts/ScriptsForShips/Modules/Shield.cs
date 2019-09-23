@@ -34,6 +34,7 @@ public class Shield : Module
 			GameObject ff = Instantiate(m_ForceFieldPrefab, m_ShieldPoint, false);
 			ff.transform.parent = m_ShieldPoint;
 			m_CurrentForceField = ff;
+            //PlayFireSound();
 		}
     }
 

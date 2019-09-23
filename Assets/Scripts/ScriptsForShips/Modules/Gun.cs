@@ -10,6 +10,7 @@ public class Gun : Module
     protected GameObject m_Projectile;
     
 
+
     private float rechargeTime = .025f;
     private float timePassedSinceLastShot = 0f;
 
@@ -20,6 +21,7 @@ public class Gun : Module
             Projectile projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation).GetComponent<Projectile>();
             projectile.m_Team = m_ParentShip.GetTeam();
             timePassedSinceLastShot = 0f;
+            //PlayFireSound();
         }
         else
         {
