@@ -17,7 +17,7 @@ public class ShipDamage : MonoBehaviour
         Projectile p = other?.GetComponent<Projectile>();
         if (p != null)
         {
-            if (p.m_Team == m_Ship.GetTeam())
+            if (p.m_Team != m_Ship.GetTeam())
             {
                 if (!currentlyImmuneToDamage)
                 {

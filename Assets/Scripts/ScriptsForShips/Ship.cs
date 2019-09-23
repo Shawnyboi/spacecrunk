@@ -70,8 +70,13 @@ public class Ship : MonoBehaviour
     public Module RemoveModuleAtCollider(Collider c)
     {
         ModuleSlot moduleToRemove = m_ColliderToModuleDictionary[c];
+        Module m = null;
+        if (moduleToRemove != null)
+        {
+            m = moduleToRemove.RemoveModule();
+        }
         m_ColliderToModuleDictionary[c] = null;
-        return moduleToRemove.RemoveModule();
+        return m;
     }
 
     public void KnockOffModuleAtCollider(Collider c)
@@ -100,7 +105,7 @@ public class Ship : MonoBehaviour
         if (list.Count > 0)
         {
             var index = Random.Range(0, list.Count - 1);
-            RemoveModuleAtCollider(m_ColliderToModuleDictionary.Keys.ElementAt(index));
+            KnockOffModuleAtCollider(list[index]);
         }else
         {
             //do nothing
@@ -157,8 +162,11 @@ public class ModuleSlot
     {
         // TODO make this take time
         Module m = m_Module;
-        m_Module.RemoveFromShip();
-        m_Module = null;
+        if (m_Module != null)
+        {
+            m_Module.RemoveFromShip();
+            m_Module = null;
+        }
         return m;
     }
 
