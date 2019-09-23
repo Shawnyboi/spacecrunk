@@ -9,6 +9,8 @@ public class CrunkAnimation : MonoBehaviour
     public bool isMoving;
     public bool isHoldingSomething;
     public bool isPumping;
+	public bool isBackstroking;
+	private bool wasBackstroking;
     [SerializeField]
     private Animator anim;
     private states currentState = states.Idle;
@@ -21,7 +23,9 @@ public class CrunkAnimation : MonoBehaviour
     public void StopGrabbing() { isHoldingSomething = false; }
     public void StartPumping() { isPumping = true; }
     public void StopPumping() { isPumping = false; }
-    public void TriggerAirlockAnimation()
+	public void StartBackstroking() { isBackstroking = true; }
+	public void StopBackstroking() { isBackstroking = false; }
+	public void TriggerAirlockAnimation()
     {
         if (isInSpace)
         {
@@ -42,7 +46,7 @@ public class CrunkAnimation : MonoBehaviour
             }
             else if (isMoving)
             {
-                return states.Backstroke;
+                return states.Swimming;
             }
             else
             {
@@ -72,7 +76,8 @@ public class CrunkAnimation : MonoBehaviour
         anim.SetBool("InSpace", false);
         anim.SetBool("Walk", false);
         anim.SetBool("Pump", false);
-        anim.SetBool("Backstroke", false);
+		anim.SetBool("Swimming", false);
+		anim.SetBool("Backstroke", false);
         anim.SetBool("Grab", false);
     }
     void ChangeAnimationState()
@@ -91,8 +96,8 @@ public class CrunkAnimation : MonoBehaviour
             case states.Pumping:
                 anim.SetBool("Pump", true);
                 return;
-            case states.Backstroke:
-                anim.SetBool("Backstroke", true);
+            case states.Swimming:
+                anim.SetBool("Swimming", true);
                 return;
             case states.Grabbing:
                 anim.SetBool("Grab", true);
@@ -108,9 +113,19 @@ public class CrunkAnimation : MonoBehaviour
         {
             currentState = newState;
             ChangeAnimationState();
-
         }
-    }
+
+		if (isBackstroking)
+		{
+			anim.SetBool("Backstroke", true);
+		}
+		else if (wasBackstroking)
+		{
+			anim.SetBool("Backstroke", false);
+		}
+
+		wasBackstroking = isBackstroking;
+	}
     void Update()
     {
         UpdateAnimator();
@@ -123,6 +138,6 @@ public class CrunkAnimation : MonoBehaviour
         Pumping,
         InSpace,
         Grabbing,
-        Backstroke
+        Swimming
     }
 }
