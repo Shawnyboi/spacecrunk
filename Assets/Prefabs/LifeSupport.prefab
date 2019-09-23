@@ -81,7 +81,7 @@ MonoBehaviour:
   m_ChargeTime: 0.5
   m_ChargeDownTime: 10
   m_AudioSource: {fileID: 7149665653457052270}
-  m_FireClip: {fileID: 8300000, guid: d66c9197f32f0b24ca5a24fb9cfff2e6, type: 3}
+  m_FireClip: {fileID: 8300000, guid: 0bcc9f6c0c3d59842af0b659009ae5d6, type: 3}
   m_ParentShip: {fileID: 0}
   ModuleCollider: {fileID: 7671110254970879359}
   m_OxygenRestoreRate: 6

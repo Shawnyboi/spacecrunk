@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Ship: {fileID: 8276667319012105416}
   hp: 3
   immuneFromDamageTime: 2
+  immuneFromShield: 0
 --- !u!1 &1996013472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2456,6 +2457,7 @@ MonoBehaviour:
   m_Team: 1
   explosion: {fileID: 2224815787743997573, guid: 8dfb39380a2315b499e877911290a6cf,
     type: 3}
+  shipDamage: {fileID: 1663240068}
 --- !u!54 &8276667319012105417
 Rigidbody:
   m_ObjectHideFlags: 0

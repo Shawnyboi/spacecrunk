@@ -5,10 +5,9 @@ using UnityEngine;
 public class Shield : Module
 {
     [SerializeField]
-    protected GameObject m_ForceFieldPrefab;
+    protected MeshRenderer m_ForceField;
     public GameObject m_CurrentForceField;
     [SerializeField]
-    protected Transform m_ShieldPoint;
     protected bool m_ShieldIsOn;
     override protected void Fire()
     {
@@ -31,17 +30,19 @@ public class Shield : Module
     {
 		if (m_CurrentForceField == null)
 		{
-			GameObject ff = Instantiate(m_ForceFieldPrefab, m_ShieldPoint, false);
-			ff.transform.parent = m_ShieldPoint;
-			m_CurrentForceField = ff;
+            m_CurrentForceField.SetActive(true);
+            m_ParentShip.shipDamage.immuneFromShield = true;
+			//GameObject ff = Instantiate(m_ForceFieldPrefab, m_ShieldPoint, false);
+			//ff.transform.parent = m_ShieldPoint;
+			//m_CurrentForceField = ff;
             //PlayFireSound();
 		}
     }
 
     protected void TurnShieldOff()
     {
-        Destroy(m_CurrentForceField);
-        m_CurrentForceField = null;
+        m_CurrentForceField.SetActive(false);
+        m_ParentShip.shipDamage.immuneFromShield = false;
     }
 
 }

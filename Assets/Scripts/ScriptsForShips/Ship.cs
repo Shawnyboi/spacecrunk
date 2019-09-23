@@ -27,6 +27,7 @@ public class Ship : MonoBehaviour
     private int m_Team;
     [SerializeField]
     private GameObject explosion;
+    public ShipDamage shipDamage;
 
     private void Start()
     {

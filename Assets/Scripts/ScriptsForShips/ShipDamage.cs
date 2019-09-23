@@ -15,6 +15,7 @@ public class ShipDamage : MonoBehaviour
     private float immuneFromDamageTime;
     private float timeSinceLastDamage;
     private bool currentlyImmuneToDamage;
+    public bool immuneFromShield;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class ShipDamage : MonoBehaviour
         {
             if (p.m_Team != m_Ship.GetTeam())
             {
-                if (!currentlyImmuneToDamage)
+                if (!currentlyImmuneToDamage && !immuneFromShield)
                 {
                     TakeDamage();
                 }
