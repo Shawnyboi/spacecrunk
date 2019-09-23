@@ -18,6 +18,19 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     protected float m_Lifetime = 7f;
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ShipDamage shipCollided = other?.GetComponent<ShipDamage>();
+
+        if (shipCollided != null)
+        {
+            if (shipCollided.GetTeam() != m_Team)
+            {
+                ConfirmHit();
+            }
+        }
+    }
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -33,6 +46,7 @@ public class Projectile : MonoBehaviour
 
     private IEnumerator LaserHit()
     {
+        m_Rigidbody.velocity = Vector3.zero;
         m_ProjectileMesh.SetActive(false);
         m_HitParticles.SetActive(true);
         yield return new WaitForSeconds(m_ParticleLifetime);

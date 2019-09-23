@@ -21,11 +21,14 @@ public class ShipDamage : MonoBehaviour
             {
                 if (!currentlyImmuneToDamage)
                 {
-                    p.ConfirmHit();
                     TakeDamage();
                 }
             }
         }
+    }
+    public int GetTeam()
+    {
+        return m_Ship.GetTeam();
     }
 
     private void TakeDamage()

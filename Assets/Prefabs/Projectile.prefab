@@ -179,6 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 0
+  m_ProjectileMesh: {fileID: 1668843987261485491}
+  m_HitParticles: {fileID: 2415795921447240710}
+  m_ParticleLifetime: 0.5
   m_Speed: 10
   m_Lifetime: 5
 --- !u!54 &6925612282880583267
@@ -212,7 +215,7 @@ PrefabInstance:
     - target: {fileID: 3675481670855690971, guid: b7afd9590f8e69949a0d5ad624165659,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3675481670855690948, guid: b7afd9590f8e69949a0d5ad624165659,
         type: 3}

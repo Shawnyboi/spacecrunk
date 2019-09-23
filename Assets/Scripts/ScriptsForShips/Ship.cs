@@ -82,7 +82,10 @@ public class Ship : MonoBehaviour
     public void KnockOffModuleAtCollider(Collider c)
     {
         var module = RemoveModuleAtCollider(c);
-        module.transform.parent = null;
+        if (module != null)
+        {
+            module.transform.parent = null;
+        }
     }
 
     private void Update()
