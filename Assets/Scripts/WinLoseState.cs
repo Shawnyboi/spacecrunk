@@ -23,7 +23,15 @@ public class WinLoseState : MonoBehaviour
 		StartCoroutine(PlayGame());
     }
 
-    private void CheckForGameOver()
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
+	private void CheckForGameOver()
     {
         bool team1lost = true;
         foreach(Crunk p in team1players){
