@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider))]
 public class ShipDamage : MonoBehaviour
 {
     [SerializeField]
+    private Image image;
+    [SerializeField]
     private Ship m_Ship;
     [SerializeField]
     private int hp;
+    private int max_hp;
     [SerializeField]
     private float immuneFromDamageTime;
     private float timeSinceLastDamage;
     private bool currentlyImmuneToDamage;
 
+    private void Awake()
+    {
+        max_hp = hp;
+    }
     private void OnTriggerEnter(Collider other)
     {
         Projectile p = other?.GetComponent<Projectile>();
@@ -55,6 +63,7 @@ public class ShipDamage : MonoBehaviour
 
     private void Update()
     {
+        image.fillAmount = (float)hp / (float)max_hp;
         HandleDamageImmunity();
     }
 
