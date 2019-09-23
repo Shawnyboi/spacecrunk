@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinLoseState : MonoBehaviour
 {
@@ -9,19 +10,24 @@ public class WinLoseState : MonoBehaviour
     public Ship team1ship;
     public Ship team2ship;
 
+	[SerializeField]
+	Animator gameOverScreen = null;
 
     private bool gameOver = false;
 
+	public bool fake1Lost = false;
+	public bool fake2Lost = false;
+
     private void Start()
     {
-        
+		StartCoroutine(PlayGame());
     }
 
     private void CheckForGameOver()
     {
         bool team1lost = true;
         foreach(Crunk p in team1players){
-            if(p != null)
+            if(p != null || !p.isAlive())
             {
                 team1lost = false;
             }
@@ -33,7 +39,7 @@ public class WinLoseState : MonoBehaviour
         bool team2lost = true;
         foreach (Crunk p in team2players)
         {
-            if (p != null)
+            if (p != null || !p.isAlive())
             {
                 team2lost = false;
             }
@@ -41,12 +47,27 @@ public class WinLoseState : MonoBehaviour
         if (team2ship != null)
         {
             team2lost = false;
+
         }
 
-        if(team1lost || team2lost)
+		team1lost = team1lost || fake1Lost;
+		team2lost = team2lost || fake2Lost;
+
+		Debug.Log(team1lost);
+		if (team1lost || team2lost)
         {
-            gameOver = true;
-            Debug.Log("GameOver");
+			if (team1lost)
+			{
+				gameOverScreen.SetTrigger("CrunkWins");
+			}
+
+			if (team2lost)
+			{
+				gameOverScreen.SetTrigger("HunkWins");
+
+			}
+
+			gameOver = true;
         }
     }
 
@@ -58,4 +79,9 @@ public class WinLoseState : MonoBehaviour
             CheckForGameOver();
         }
     }
+
+	public void GotoMainMenu()
+	{
+		SceneManager.LoadScene("StartScreen");
+	}
 }
