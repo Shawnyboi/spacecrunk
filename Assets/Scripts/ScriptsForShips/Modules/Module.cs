@@ -94,7 +94,6 @@ abstract public class Module : MonoBehaviour
             if (m_Charge >= m_MaxCharge)
             {
                 //start firing
-                Debug.Log("Starting firing");
                 StartFiring();
             }
         }
