@@ -53,7 +53,6 @@ public class WinLoseState : MonoBehaviour
 		team1lost = team1lost || fake1Lost;
 		team2lost = team2lost || fake2Lost;
 
-		Debug.Log(team1lost);
 		if (team1lost || team2lost)
         {
 			if (team1lost)
