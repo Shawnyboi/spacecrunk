@@ -199,7 +199,10 @@ public class ModuleSlot
             m_Module.RemoveFromShip();
             m_Module = null;
         }
-		m_Module.Charger = null;
+        if (m_Module != null)
+        {
+            m_Module.Charger = null;
+        }
 
 		return m;
     }
