@@ -4809,7 +4809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6912289425529273373
 Transform:
   m_ObjectHideFlags: 0
@@ -14431,6 +14431,7 @@ MonoBehaviour:
   m_ChargeDownTime: 1
   m_ParentShip: {fileID: 0}
   ModuleCollider: {fileID: 7075983315468205066}
+  firingThrusters: {fileID: 2210434326487381959}
   m_ForcePoint: {fileID: 9089295686471809527}
   m_EngineForceMagnitude: 50000
 --- !u!1 &8649745930414701952
@@ -14517,11 +14518,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4843401081302673241}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 5657ad62e8a2fe14195e89fc4b5e83af,
-        type: 3}
-      propertyPath: m_Name
-      value: Engines_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5657ad62e8a2fe14195e89fc4b5e83af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14576,6 +14572,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5657ad62e8a2fe14195e89fc4b5e83af,
+        type: 3}
+      propertyPath: m_Name
+      value: Engines_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5657ad62e8a2fe14195e89fc4b5e83af, type: 3}

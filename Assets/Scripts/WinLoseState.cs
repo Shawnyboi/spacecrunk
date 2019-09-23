@@ -46,6 +46,7 @@ public class WinLoseState : MonoBehaviour
         if(team1lost || team2lost)
         {
             gameOver = true;
+            Debug.Log("GameOver");
         }
     }
 
