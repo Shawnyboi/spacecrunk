@@ -5,6 +5,8 @@ using UnityEngine;
 public class Engines : Module
 {
     [SerializeField]
+    protected GameObject firingThrusters;
+    [SerializeField]
     protected Transform m_ForcePoint;
     [SerializeField]
     protected float m_EngineForceMagnitude;
@@ -22,8 +24,16 @@ public class Engines : Module
 
     protected void MoveShip()
     {
+        StartCoroutine(FireThrusters());
         Rigidbody parentRB = m_ParentShip.GetComponent<Rigidbody>();
         parentRB.AddForceAtPosition(-m_ForcePoint.forward * m_EngineForceMagnitude, m_ForcePoint.position);
+    }
+
+    private IEnumerator FireThrusters()
+    {
+        firingThrusters.SetActive(true);
+        yield return new WaitForSeconds(m_ChargeDownTime);
+        firingThrusters.SetActive(false);
     }
     /*uncomment for testing*/
     /*
