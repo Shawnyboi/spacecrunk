@@ -120,7 +120,7 @@ MonoBehaviour:
   grabbedModule: {fileID: 0}
   nearbyAirlock: {fileID: 0}
   moduleContainer: {fileID: 0}
-  playerNumber: 1
+  playerNumber: 2
 --- !u!114 &1767612640
 MonoBehaviour:
   m_ObjectHideFlags: 0
