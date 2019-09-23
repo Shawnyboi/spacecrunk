@@ -21,6 +21,7 @@ public class ShipDamage : MonoBehaviour
             {
                 if (!currentlyImmuneToDamage)
                 {
+                    p.ConfirmHit();
                     TakeDamage();
                 }
             }

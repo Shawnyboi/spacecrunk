@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1480182023976455687}
   - component: {fileID: 1767612640}
   - component: {fileID: 7425523097318513543}
+  - component: {fileID: 97738887}
   m_Layer: 10
   m_Name: Crunk
   m_TagString: Untagged
@@ -86,8 +87,7 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 100
   groundedDragFactor: 0.6
-  floatingDragFactor: 0.8
-  Stationary: 0
+  floatingDragFactor: 0.95
 --- !u!114 &1480182023976455680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   grabbedModule: {fileID: 0}
   nearbyAirlock: {fileID: 0}
   moduleContainer: {fileID: 0}
-  playerNumber: 1
+  playerNumber: 2
 --- !u!114 &1767612640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   isMoving: 0
   isHoldingSomething: 0
   isPumping: 0
+  isBackstroking: 0
   anim: {fileID: 506567624456130808}
 --- !u!114 &7425523097318513543
 MonoBehaviour:
@@ -148,6 +149,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e010bd28abe794823a70ff77d0cdb072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &97738887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480182023976455695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03b9a952c4c74498ae7568683ef7da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPush: 10
+  maxPush: 50
+  maxTime: 1
+  elapsedStroke: 0
+--- !u!114 &1651911949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905964962681294737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f3ec2cb93844d54863ab4a3bb75c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2565370485355354974
@@ -219,6 +248,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535d363911eafb1468d1c5cb2f4bf44b, type: 3}
+--- !u!1 &6905964962681294737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8956793613565105359, guid: 535d363911eafb1468d1c5cb2f4bf44b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2565370485355354974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7605932517455003010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5338935508798007004, guid: 535d363911eafb1468d1c5cb2f4bf44b,
