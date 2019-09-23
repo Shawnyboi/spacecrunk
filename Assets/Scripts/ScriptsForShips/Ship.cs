@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
@@ -11,6 +13,8 @@ public class Ship : MonoBehaviour
 
     public Dictionary<Collider, Transform> m_ColliderToAnchorDictionary = new Dictionary<Collider, Transform>();
 
+    [SerializeField]
+    Image OxygenSlider;
     [SerializeField]
     private List<Collider> m_ModuleColliders = new List<Collider>(3);
     [SerializeField]
@@ -92,8 +96,9 @@ public class Ship : MonoBehaviour
     {
         if (m_OxygenPercent > 0)
         {
-            m_OxygenPercent = Mathf.Max(m_OxygenPercent - m_OxygenDecayRate, 0);
+            m_OxygenPercent = Mathf.Max(m_OxygenPercent - m_OxygenDecayRate * Time.deltaTime, 0);
         }
+        OxygenSlider.fillAmount = m_OxygenPercent / 100f;
     }
 
     public void AddOxygen(float amt)
