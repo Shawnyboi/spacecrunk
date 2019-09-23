@@ -25,6 +25,8 @@ public class Ship : MonoBehaviour
     protected Rigidbody m_Rigidbody;
     [SerializeField]
     private int m_Team;
+    [SerializeField]
+    private GameObject explosion;
 
     private void Start()
     {
@@ -139,6 +141,13 @@ public class Ship : MonoBehaviour
 
     public void Kill()
     {
+        var exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
+        var aud = exp.GetComponent<AudioSource>();
+        if (aud != null)
+        {
+            aud.Play();
+        }
+
         Destroy(this.gameObject); //💀💀💀💀💀💀💀💀
     }
 

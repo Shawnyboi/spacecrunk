@@ -127,7 +127,7 @@ MonoBehaviour:
   m_ChargeTime: 0.5
   m_ChargeDownTime: 5
   m_AudioSource: {fileID: 5940990508973682230}
-  m_FireClip: {fileID: 8300000, guid: 87be133e2738b6e46b190337731e4768, type: 3}
+  m_FireClip: {fileID: 8300000, guid: 76121336f3555fc4cb9d3bdcdb5be91b, type: 3}
   m_ParentShip: {fileID: 0}
   ModuleCollider: {fileID: 3719228012789128808}
   m_ForceFieldPrefab: {fileID: 242477934750859677, guid: 19a536e6f53143e44afa92461a9fa2f7,
