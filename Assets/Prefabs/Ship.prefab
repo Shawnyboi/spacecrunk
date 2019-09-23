@@ -3591,6 +3591,7 @@ MonoBehaviour:
   explosion: {fileID: 2224815787743997573, guid: 8dfb39380a2315b499e877911290a6cf,
     type: 3}
   shipDamage: {fileID: 1663240068}
+  forcefield: {fileID: 0}
 --- !u!54 &8276667319012105417
 Rigidbody:
   m_ObjectHideFlags: 0
