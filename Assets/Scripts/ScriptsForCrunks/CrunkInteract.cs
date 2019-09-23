@@ -174,7 +174,7 @@ public class CrunkInteract : MonoBehaviour
         Module m = crunk.grabbedModule;
         crunk.DropModule(false);
         crunk.nearbySlot.AddModule(m);
-        holdingDownButton = false;
+		holdingDownButton = false;
 		canHoldButton = false;
 
 		var slotAnimation = m.GetComponentInParent<ModuleSlotAnimation>();

@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6949455593001090492}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3528924905042577770
 BoxCollider:
@@ -89,7 +89,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511513838724072949}
-  - {fileID: 7369397584525442782}
   - {fileID: 4215580928108608836}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -127,13 +126,12 @@ MonoBehaviour:
   m_ChargeTime: 0.5
   m_ChargeDownTime: 5
   m_AudioSource: {fileID: 5940990508973682230}
-  m_FireClip: {fileID: 8300000, guid: 87be133e2738b6e46b190337731e4768, type: 3}
+  m_FireClip: {fileID: 8300000, guid: 76121336f3555fc4cb9d3bdcdb5be91b, type: 3}
   m_ParentShip: {fileID: 0}
   ModuleCollider: {fileID: 3719228012789128808}
-  m_ForceFieldPrefab: {fileID: 242477934750859677, guid: 19a536e6f53143e44afa92461a9fa2f7,
-    type: 3}
+  m_ForceFieldPrefab: {fileID: 0}
   m_CurrentForceField: {fileID: 0}
-  m_ShieldPoint: {fileID: 7369397584525442782}
+  m_ShieldPoint: {fileID: 0}
 --- !u!82 &5940990508973682230
 AudioSource:
   m_ObjectHideFlags: 0
@@ -275,36 +273,6 @@ Transform:
   m_Father: {fileID: 6949455593001090492}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
---- !u!1 &8124552857625627913
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7369397584525442782}
-  m_Layer: 0
-  m_Name: ShieldPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7369397584525442782
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124552857625627913}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6949455593001090492}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4796250864956666115
 PrefabInstance:
   m_ObjectHideFlags: 0

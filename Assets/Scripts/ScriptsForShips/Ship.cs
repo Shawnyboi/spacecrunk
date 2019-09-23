@@ -25,6 +25,9 @@ public class Ship : MonoBehaviour
     protected Rigidbody m_Rigidbody;
     [SerializeField]
     private int m_Team;
+    [SerializeField]
+    private GameObject explosion;
+    public ShipDamage shipDamage;
 
     private void Start()
     {
@@ -139,6 +142,13 @@ public class Ship : MonoBehaviour
 
     public void Kill()
     {
+        var exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
+        var aud = exp.GetComponent<AudioSource>();
+        if (aud != null)
+        {
+            aud.Play();
+        }
+
         Destroy(this.gameObject); //💀💀💀💀💀💀💀💀
     }
 
@@ -176,9 +186,10 @@ public class ModuleSlot
         m_Module.transform.position = anchor.position;
         m_Module.GetComponent<Rigidbody>().isKinematic = true;
         m_Module.AttachToShip(m_Ship);
-    }
+		m_Module.Charger = anchor.GetComponent<ModuleCharge>();
+	}
 
-    public Module RemoveModule()
+	public Module RemoveModule()
     {
         // TODO make this take time
         Module m = m_Module;
@@ -187,7 +198,9 @@ public class ModuleSlot
             m_Module.RemoveFromShip();
             m_Module = null;
         }
-        return m;
+		m_Module.Charger = null;
+
+		return m;
     }
 
     public bool ModuleOccupied()
