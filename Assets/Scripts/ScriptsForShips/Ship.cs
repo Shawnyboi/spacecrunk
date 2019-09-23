@@ -188,6 +188,7 @@ public class ModuleSlot
         m_Module.GetComponent<Rigidbody>().isKinematic = true;
         m_Module.AttachToShip(m_Ship);
 		m_Module.Charger = anchor.GetComponent<ModuleCharge>();
+		anchor.GetComponent<ModuleAttachAudio>().Attach();
 	}
 
 	public Module RemoveModule()
@@ -203,6 +204,8 @@ public class ModuleSlot
         {
             m_Module.Charger = null;
         }
+		Transform anchor = m_Ship.m_ColliderToAnchorDictionary[m_Ship.GetColliderFromModuleSlot(this)];
+		anchor.GetComponent<ModuleAttachAudio>().Detach();
 
 		return m;
     }
